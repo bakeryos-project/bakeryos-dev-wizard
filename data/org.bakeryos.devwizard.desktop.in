@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BakeryOSDevWizard
+Exec=BakeryOSDevWizard
+Icon=org.bakeryos.devwizard
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

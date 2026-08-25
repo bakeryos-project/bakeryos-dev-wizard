@@ -1,0 +1,54 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $BakeryOSDevWizardInstallProgressWindow: Adw.Window {
+    title: _("Installing Packages");
+    default-width: 450;
+    default-height: 250;
+    modal: true;
+    resizable: false;
+
+    content: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+            show-start-title-buttons: false;
+            show-end-title-buttons: false;
+        }
+
+        content: Gtk.Box {
+            orientation: vertical;
+            halign: center;
+            valign: center;
+            spacing: 20;
+            margin-top: 30;
+            margin-bottom: 30;
+            margin-start: 30;
+            margin-end: 30;
+
+            Label header_label{
+                label: _("Setting up your development environment...");
+                styles ["title-2"]
+            }
+
+            ProgressBar progress_bar {
+                width-request: 350;
+                fraction: 0.0;
+            }
+
+            Label status_label {
+                label: _("Preparing...");
+                styles ["dim-label"]
+            }
+
+            Box {
+                height-request: 10;
+            }
+
+            Button cancel_button {
+                label: _("Cancel Installation");
+                halign: center;
+                styles ["destructive-action", "pill"]
+            }
+        };
+    };
+}

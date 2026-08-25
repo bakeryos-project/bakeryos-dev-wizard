@@ -1,0 +1,98 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $Card: Gtk.FlowBoxChild {
+  focusable: true;
+  hexpand: true;
+  vexpand: false;
+  height-request: 200;
+
+  child: Adw.Bin {
+    styles [
+      "card",
+    ]
+
+    child: Gtk.Box {
+      orientation: vertical;
+      spacing: 12;
+      margin-top: 16;
+      margin-bottom: 16;
+      margin-start: 16;
+      margin-end: 16;
+
+    Gtk.Box {
+  orientation: horizontal;
+  spacing: 16;
+  hexpand: true;
+  vexpand: true;
+
+  Gtk.Image package_icon {
+    icon-name: "docker-symbolic";
+    pixel-size: 50;
+    valign: start;
+
+
+  }
+
+  Gtk.Box {
+    orientation: vertical;
+    spacing: 10;
+    hexpand: true;
+    width-request: 0;
+    valign: start;
+
+    Gtk.Label title_label {
+      label: "No title";
+      wrap: true;
+      xalign: 0;
+      hexpand: true;
+      lines: 2;
+
+      attributes: "weight bold, scale 1.2";
+    }
+
+    Gtk.Label desc_label {
+      label: "No description";
+      wrap: true;
+      xalign: 0;
+      hexpand: true;
+      width-request: 0;
+
+      lines: 5;
+      ellipsize: end;
+
+      styles [
+        "dim-label",
+      ]
+    }
+  }
+}
+
+      Gtk.Box {
+        orientation: horizontal;
+        spacing: 10;
+        homogeneous: true;
+        hexpand: true;
+        valign: end;
+
+        Gtk.Button add_button {
+          label: "Add";
+          hexpand: true;
+
+          styles [
+            "suggested-action",
+          ]
+        }
+
+        Gtk.Button details_button {
+          label: "Details";
+          hexpand: true;
+
+          styles [
+            "flat",
+          ]
+        }
+      }
+    };
+  };
+}

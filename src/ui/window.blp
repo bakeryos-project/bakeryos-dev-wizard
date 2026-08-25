@@ -1,0 +1,215 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
+    title: _("BakeryOS Dev Wizard");
+    default-width: 900;
+    default-height: 650;
+
+    content: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Gtk.Box {
+            orientation: vertical;
+            vexpand: true;
+            hexpand: true;
+            margin-top: 20;
+            margin-bottom: 20;
+            margin-start: 20;
+            margin-end: 20;
+            spacing: 15;
+
+            Adw.ViewSwitcher view_switcher {
+                stack: stack;
+                halign: center;
+            }
+
+
+            Adw.ViewStack stack {
+                vexpand: true;
+                hexpand: true;
+
+                Adw.ViewStackPage {
+                    name: "code_editor";
+                    title: _("Code Editors");
+
+
+                    child: Gtk.ScrolledWindow {
+                        vexpand: true;
+                        hexpand: true;
+
+                        child: Gtk.FlowBox code_editor_packages {
+                            valign: start;
+                            hexpand: true;
+                            homogeneous: true;
+
+                            row-spacing: 12;
+                            column-spacing: 12;
+
+                            min-children-per-line: 3;
+                            max-children-per-line: 3;
+
+                            selection-mode: none;
+                        };
+                    };
+                }
+
+                Adw.ViewStackPage {
+                    name: "programming_language";
+                    title: _("Languages");
+
+
+                    child: Gtk.ScrolledWindow {
+                        vexpand: true;
+                        hexpand: true;
+
+                        child: Gtk.FlowBox programming_language_packages {
+                            valign: start;
+                            hexpand: true;
+                            homogeneous: true;
+
+                            row-spacing: 12;
+                            column-spacing: 12;
+
+                            min-children-per-line: 3;
+                            max-children-per-line: 3;
+
+                            selection-mode: none;
+                        };
+                    };
+                }
+
+                Adw.ViewStackPage {
+                    name: "framework";
+                    title: _("Frameworks");
+
+
+                    child: Gtk.ScrolledWindow {
+                        vexpand: true;
+                        hexpand: true;
+
+                        child: Gtk.FlowBox framework_packages {
+                            valign: start;
+                            hexpand: true;
+                            homogeneous: true;
+
+                            row-spacing: 12;
+                            column-spacing: 12;
+
+                            min-children-per-line: 3;
+                            max-children-per-line: 3;
+
+                            selection-mode: none;
+                        };
+                    };
+                }
+
+                Adw.ViewStackPage {
+                    name: "tooling";
+                    title: _("Toolings");
+
+
+                    child: Gtk.ScrolledWindow {
+                        vexpand: true;
+                        hexpand: true;
+
+                        child: Gtk.FlowBox tooling_packages {
+                            valign: start;
+                            hexpand: true;
+                            homogeneous: true;
+
+                            row-spacing: 12;
+                            column-spacing: 12;
+
+                            min-children-per-line: 3;
+                            max-children-per-line: 3;
+
+                            selection-mode: none;
+                        };
+                    };
+                }
+
+                Adw.ViewStackPage {
+                    name: "ai_agent";
+                    title: _("AI Agents");
+
+
+                    child: Gtk.ScrolledWindow {
+                        vexpand: true;
+                        hexpand: true;
+
+                        child: Gtk.FlowBox ai_agent_packages {
+                            valign: start;
+                            hexpand: true;
+                            homogeneous: true;
+
+                            row-spacing: 12;
+                            column-spacing: 12;
+
+                            min-children-per-line: 3;
+                            max-children-per-line: 3;
+
+                            selection-mode: none;
+                        };
+                    };
+                }
+
+                Adw.ViewStackPage {
+                    name: "browser";
+                    title: _("Browsers");
+
+
+                    child: Gtk.ScrolledWindow {
+                        vexpand: true;
+                        hexpand: true;
+
+                        child: Gtk.FlowBox browser_packages {
+                            valign: start;
+                            hexpand: true;
+                            homogeneous: true;
+
+                            row-spacing: 12;
+                            column-spacing: 12;
+
+                            min-children-per-line: 3;
+                            max-children-per-line: 3;
+
+                            selection-mode: none;
+                        };
+                    };
+                }
+
+                Adw.ViewStackPage {
+                    name: "other";
+                    title: _("Other");
+
+                    child: Gtk.ScrolledWindow {
+                        vexpand: true;
+                        hexpand: true;
+
+                        child: Gtk.FlowBox other_packages {
+                            valign: start;
+                            hexpand: true;
+                            homogeneous: true;
+
+                            row-spacing: 12;
+                            column-spacing: 12;
+
+                            min-children-per-line: 3;
+                            max-children-per-line: 3;
+
+                            selection-mode: none;
+                        };
+                    };
+                }
+            }
+
+            Gtk.Button install_button{
+                label: "Install Selected Packages";
+                css-classes: ["suggested-action", "pill"];
+                halign: center;
+            }
+        };
+    };
+}

@@ -1,0 +1,6 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/org.bakeryos.devwizard.desktop.in
+data/org.bakeryos.devwizard.metainfo.xml.in
+data/org.bakeryos.devwizard.gschema.xml
+src/window.ui
