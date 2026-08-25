@@ -1,23 +1,3 @@
-/* card.rs
- *
- * Copyright 2026 smtdfc
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 use std::sync::Arc;
 
 use adw::subclass::prelude::*;
@@ -27,12 +7,10 @@ use gtk::prelude::*;
 use gtk::{gio, glib};
 
 use crate::models::event::Event;
-use crate::models::package_info::{self, PackageInfo};
+use crate::models::package_info::PackageInfo;
 
 mod imp {
-    use std::{cell::Cell, sync::Arc};
-
-    use gtk::FlowBox;
+    use std::cell::Cell;
 
     use super::*;
 

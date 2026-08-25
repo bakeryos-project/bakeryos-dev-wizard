@@ -1,0 +1,70 @@
+name: Build and Sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: |
+          pacman -Sy --noconfirm base-devel gnupg git rclone
+
+      - uses: dopplerhq/secrets-fetch-action@v2.0.0
+        id: doppler
+        with:
+          doppler-token: ${{ secrets.DOPPLER_TOKEN }}
+          inject-env-vars: true
+
+      - name: Import GPG Key
+        run: |
+          echo "$GPG_PRIVATE_KEY" | base64 -d > private.key
+          gpg --import --batch private.key
+          rm -f private.key
+
+      - name: Build package with makepkg
+        run: |
+          useradd builder -m
+          passwd -d builder
+          printf 'builder ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+          chown -R builder:builder .
+          sudo -u builder makepkg -s --noconfirm
+
+      - name: Sign packages
+        run: |
+          echo "$GPG_PASSPHRASE" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 --detach-sign *.pkg.tar.zst
+
+      - name: Configure Rclone and Sync to R2
+        run: |
+          mkdir -p ~/.config/rclone
+          cat <<EOF > ~/.config/rclone/rclone.conf
+          [r2]
+          type = s3
+          provider = Cloudflare
+          access_key_id = $R2_ACCESS_KEY
+          secret_access_key = $R2_SECRET_KEY
+          endpoint = $R2_ENDPOINT
+          EOF
+
+          rclone copy . r2:$R2_BUCKET/x86_64 --include "*.pkg.tar.zst" --include "*.pkg.tar.zst.sig"
+
+    #   - name: Notify / Trigger Repository Update
+    #     run: |
+    #       PKG_NAMES=$(echo *.pkg.tar.zst | tr ' ' ',')
+    #       echo "New packages: $PKG_NAMES"
+    #       curl -X POST \
+    #         -H "Authorization: token ${{ env.GH_PAT_TRIGGER }}" \
+    #         -H "Accept: application/vnd.github.v3+json" \
+    #         https://api.github.com/repos/OWNER/REPO/dispatches \
+    #         -d '{"event_type": "update_repo", "client_payload": {"packages": "'"$PKG_NAMES"'"}}'

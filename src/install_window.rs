@@ -1,21 +1,12 @@
-use std::cell::RefCell;
-use std::ops::Deref;
-use std::rc::Rc;
-use std::sync::Arc;
-
 use adw::subclass::prelude::*;
 use gtk::glib::clone;
-use gtk::glib::property::PropertyGet;
 use gtk::prelude::*;
 use gtk::{gio, glib};
 
-use crate::components::card::Card;
-use crate::models::event::Event;
-use crate::models::package_info::{self, PackageGroup, PackageInfo};
+use crate::models::package_info::PackageInfo;
 use crate::services::package_service::PackageService;
 
 mod imp {
-    use gtk::glib::property;
 
     use super::*;
 
