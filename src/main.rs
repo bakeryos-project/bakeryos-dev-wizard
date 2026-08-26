@@ -21,13 +21,10 @@
 mod application;
 mod components;
 mod config;
-mod install_window;
 mod models;
 mod services;
-mod window;
+mod windows;
 use self::application::BakeryOSDevWizardApplication;
-use self::window::BakeryOSDevWizardWindow;
-
 use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
 use gettextrs::{bind_textdomain_codeset, bindtextdomain, textdomain};
 use gtk::prelude::*;

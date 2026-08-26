@@ -1,32 +1,14 @@
-/* application.rs
- *
- * Copyright 2026 smtdfc
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 use adw::prelude::*;
 use adw::subclass::prelude::*;
 use gettextrs::gettext;
 use gtk::{gio, glib};
 
 use crate::config::VERSION;
-use crate::BakeryOSDevWizardWindow;
 
 mod imp {
+
+    use crate::windows::main_window::MainWindow;
+
     use super::*;
 
     #[derive(Debug, Default)]
@@ -57,10 +39,11 @@ mod imp {
             let application = self.obj();
             // Get the current window or create one if necessary
             let window = application.active_window().unwrap_or_else(|| {
-                let window = BakeryOSDevWizardWindow::new(&*application);
+                let window = MainWindow::new(&*application);
                 window.upcast()
             });
 
+            window.maximize();
             // Ask the window manager/compositor to present the window
             window.present();
         }

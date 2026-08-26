@@ -1,28 +1,30 @@
 use std::cell::RefCell;
-use std::ops::Deref;
 use std::rc::Rc;
 use std::sync::Arc;
 
 use adw::subclass::prelude::*;
+use async_channel::{Receiver, Sender};
 use gtk::glib::clone;
 use gtk::prelude::*;
 use gtk::{gio, glib};
 
 use crate::components::card::Card;
-use crate::install_window::BakeryOSDevWizardInstallProgressWindow;
 use crate::models::event::Event;
 use crate::models::package_info::{PackageGroup, PackageInfo};
 use crate::services::package_service::PackageService;
+use crate::windows::install_window::InstallProgressWindow;
 
 mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate, glib::Properties)]
     #[template(resource = "/org/bakeryos/devwizard/window.ui")]
-    #[properties(wrapper_type = super::BakeryOSDevWizardWindow)]
-    pub struct BakeryOSDevWizardWindow {
+    #[properties(wrapper_type = super::MainWindow)]
+    pub struct MainWindow {
         #[property(get, set)]
         pub packages_selected: Rc<RefCell<Vec<String>>>,
+
+        pub packages: RefCell<Vec<PackageInfo>>,
 
         #[template_child]
         pub code_editor_packages: TemplateChild<gtk::FlowBox>,
@@ -50,9 +52,9 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for BakeryOSDevWizardWindow {
-        const NAME: &'static str = "BakeryOSDevWizardWindow";
-        type Type = super::BakeryOSDevWizardWindow;
+    impl ObjectSubclass for MainWindow {
+        const NAME: &'static str = "MainWindow";
+        type Type = super::MainWindow;
         type ParentType = adw::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
@@ -64,42 +66,63 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for BakeryOSDevWizardWindow {}
-    impl WidgetImpl for BakeryOSDevWizardWindow {}
-    impl WindowImpl for BakeryOSDevWizardWindow {}
-    impl ApplicationWindowImpl for BakeryOSDevWizardWindow {}
-    impl AdwApplicationWindowImpl for BakeryOSDevWizardWindow {}
+    impl ObjectImpl for MainWindow {}
+    impl WidgetImpl for MainWindow {}
+    impl WindowImpl for MainWindow {}
+    impl ApplicationWindowImpl for MainWindow {}
+    impl AdwApplicationWindowImpl for MainWindow {}
 }
 
 glib::wrapper! {
-    pub struct BakeryOSDevWizardWindow(ObjectSubclass<imp::BakeryOSDevWizardWindow>)
+    pub struct MainWindow(ObjectSubclass<imp::MainWindow>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,        @implements gio::ActionGroup, gio::ActionMap;
 }
 
-impl BakeryOSDevWizardWindow {
+impl MainWindow {
     pub fn new<P: IsA<gtk::Application>>(application: &P) -> Self {
-        let obj: BakeryOSDevWizardWindow = glib::Object::builder()
+        let obj: MainWindow = glib::Object::builder()
             .property("application", application)
             .build();
 
+        let (sender, receiver) = async_channel::unbounded::<Event>();
         let imp = obj.imp();
-        imp.show_packages();
+        imp.load_data();
+        imp.show_packages(sender);
+
+        imp.install_button.connect_clicked(clone!(
+            #[weak]
+            imp,
+            move |_button| {
+                imp.on_install_button_clicked();
+            }
+        ));
+
+        glib::spawn_future_local(clone!(
+            #[weak]
+            imp,
+            async move {
+                imp.listen_event_from_receiver(receiver).await;
+            }
+        ));
 
         obj
     }
 }
 
-impl imp::BakeryOSDevWizardWindow {
-    fn show_packages(&self) {
-        let (sender, receiver) = async_channel::unbounded::<Event>();
-        let list = match PackageService::load_packages() {
+impl imp::MainWindow {
+    fn load_data(&self) {
+        let mut packages = self.packages.borrow_mut();
+        *packages = match PackageService::load_packages() {
             Ok(p) => p,
             Err(e) => {
                 println!("{e}");
-                Arc::new(vec![])
+                vec![]
             }
         };
-        for package in list.deref() {
+    }
+
+    fn show_packages(&self, sender: Sender<Event>) {
+        for package in self.packages.borrow().iter() {
             let group: PackageGroup = package.group.clone();
             let p = Arc::new(package.to_owned());
             let card = Card::new(p, sender.clone());
@@ -133,54 +156,47 @@ impl imp::BakeryOSDevWizardWindow {
                 }
             }
         }
+    }
 
-        self.install_button.connect_clicked(clone!(
-            #[strong(rename_to = window)]
-            self.obj(),
-            #[strong(rename_to = package_selected)]
-            self.packages_selected,
-            move |_button| {
-                let selected_ids = package_selected.borrow();
-                let selected_packages: Vec<PackageInfo> = list
-                    .iter()
-                    .filter(|pkg| selected_ids.contains(&pkg.id))
-                    .cloned()
-                    .collect();
-                let progress_window =
-                    BakeryOSDevWizardInstallProgressWindow::new(selected_packages);
-                progress_window.set_transient_for(Some(&window));
-                progress_window.present();
+    pub async fn listen_event_from_receiver(&self, receiver: Receiver<Event>) {
+        while let Ok(event) = receiver.recv().await {
+            match event.name.as_str() {
+                "select-package" => {
+                    let package_id = event.package_id;
 
-                let progress_win_clone = progress_window.clone();
-                progress_window
-                    .imp()
-                    .cancel_button()
-                    .connect_clicked(move |_| {
-                        progress_win_clone.close();
-                    });
-            }
-        ));
-
-        glib::spawn_future_local(clone!(
-            #[strong(rename_to = package_selected)]
-            self.packages_selected,
-            async move {
-                while let Ok(event) = receiver.recv().await {
-                    match event.name.as_str() {
-                        "select-package" => {
-                            let package_id = event.package_id;
-
-                            let mut vec = package_selected.borrow_mut();
-                            if let Some(pos) = vec.iter().position(|x| x == &package_id) {
-                                vec.remove(pos);
-                            } else {
-                                vec.push(package_id);
-                            }
-                        }
-                        _ => {}
+                    let mut vec = self.packages_selected.borrow_mut();
+                    if let Some(pos) = vec.iter().position(|x| x == &package_id) {
+                        vec.remove(pos);
+                    } else {
+                        vec.push(package_id);
                     }
                 }
+                _ => {}
             }
-        ));
+        }
+    }
+
+    pub fn on_install_button_clicked(&self) {
+        let selected_ids = self.packages_selected.borrow();
+        let selected_packages = self
+            .packages
+            .borrow()
+            .iter()
+            .filter(|pkg| selected_ids.contains(&pkg.id))
+            .cloned()
+            .collect();
+
+        let window = self.obj();
+        let progress_window = InstallProgressWindow::new(selected_packages);
+        progress_window.set_transient_for(Some(window.as_ref()));
+        progress_window.present();
+
+        let progress_win_clone = progress_window.clone();
+        progress_window
+            .imp()
+            .cancel_button()
+            .connect_clicked(move |_| {
+                progress_win_clone.close();
+            });
     }
 }

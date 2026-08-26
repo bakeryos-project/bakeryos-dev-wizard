@@ -1,10 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $BakeryOSDevWizardInstallProgressWindow: Adw.Window {
+template $InstallProgressWindow: Adw.Window {
     title: _("Installing Packages");
-    default-width: 450;
-    default-height: 250;
+    default-width: 650;
+    default-height: 350;
     modal: true;
     resizable: false;
 
@@ -38,6 +38,21 @@ template $BakeryOSDevWizardInstallProgressWindow: Adw.Window {
             Label status_label {
                 label: _("Preparing...");
                 styles ["dim-label"]
+            }
+
+            Gtk.ScrolledWindow {
+                vexpand: true;
+                hexpand: true;
+                hscrollbar-policy: never;
+                height-request: 200;
+                width-request: 400;
+
+                styles ["card"]
+
+                child: Gtk.ListBox package_list_box {
+                    selection-mode: none;
+                    styles ["boxed-list"]
+                };
             }
 
             Box {

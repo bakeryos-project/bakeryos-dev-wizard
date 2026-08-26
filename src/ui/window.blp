@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
+template $MainWindow: Adw.ApplicationWindow {
     title: _("BakeryOS Dev Wizard");
     default-width: 900;
     default-height: 650;
@@ -23,6 +23,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
             Adw.ViewSwitcher view_switcher {
                 stack: stack;
                 halign: center;
+                policy:wide;
             }
 
 
@@ -33,7 +34,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
                 Adw.ViewStackPage {
                     name: "code_editor";
                     title: _("Code Editors");
-
+                    icon-name: "applications-development-symbolic";
 
                     child: Gtk.ScrolledWindow {
                         vexpand: true;
@@ -58,7 +59,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
                 Adw.ViewStackPage {
                     name: "programming_language";
                     title: _("Languages");
-
+                    icon-name: "utilities-terminal-symbolic";
 
                     child: Gtk.ScrolledWindow {
                         vexpand: true;
@@ -83,7 +84,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
                 Adw.ViewStackPage {
                     name: "framework";
                     title: _("Frameworks");
-
+                    icon-name: "package-x-generic-symbolic";
 
                     child: Gtk.ScrolledWindow {
                         vexpand: true;
@@ -108,7 +109,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
                 Adw.ViewStackPage {
                     name: "tooling";
                     title: _("Toolings");
-
+                    icon-name: "applications-system-symbolic";
 
                     child: Gtk.ScrolledWindow {
                         vexpand: true;
@@ -133,7 +134,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
                 Adw.ViewStackPage {
                     name: "ai_agent";
                     title: _("AI Agents");
-
+                    icon-name: "cpu-symbolic";
 
                     child: Gtk.ScrolledWindow {
                         vexpand: true;
@@ -158,7 +159,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
                 Adw.ViewStackPage {
                     name: "browser";
                     title: _("Browsers");
-
+                    icon-name: "web-browser-symbolic";
 
                     child: Gtk.ScrolledWindow {
                         vexpand: true;
@@ -183,6 +184,7 @@ template $BakeryOSDevWizardWindow: Adw.ApplicationWindow {
                 Adw.ViewStackPage {
                     name: "other";
                     title: _("Other");
+                    icon-name: "view-app-grid-symbolic";
 
                     child: Gtk.ScrolledWindow {
                         vexpand: true;

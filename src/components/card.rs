@@ -68,58 +68,74 @@ impl Card {
         let obj: Card = glib::Object::new();
         let imp = obj.imp();
         imp.is_added.set(false);
-        imp.title_label.set_label(&package_info.name);
-        imp.desc_label.set_label(&package_info.description);
+        imp.show(&package_info);
 
-        match package_info.icon.as_deref() {
-            Some(icon) => {
-                imp.fetch_icon(icon);
-            }
-            None => {
-                let image: &gtk::Image = &imp.package_icon.as_ref();
-                image.set_icon_name(Some("application-x-executable-symbolic"));
-            }
-        }
-        let pkg = package_info.clone();
-        imp.details_button.connect_clicked(move |_| {
-            let url = pkg.url.clone();
-            let _ = webbrowser::open(&url);
-        });
-
-        let pkg = package_info.clone();
-        imp.add_button.connect_clicked(clone!(
-            #[weak]
-            pkg,
-            #[weak]
-            imp,
-            move |button| {
-                let tx = tx.clone();
-                let current = imp.is_added.get();
-                imp.is_added.set(!current);
-
-                if !current {
-                    button.set_label("Unselect");
-                    button.remove_css_class("suggested-action");
-                } else {
-                    button.set_label("Add");
-                    button.add_css_class("suggested-action");
-                }
-
-                glib::spawn_future_local(async move {
-                    let _ = tx
-                        .send(Event {
-                            name: "select-package".to_owned(),
-                            package_id: pkg.id.clone(),
-                        })
-                        .await;
-                });
+        let pkg_info_1 = package_info.clone();
+        imp.details_button.connect_clicked(clone!(
+            #[strong]
+            pkg_info_1,
+            move |_| {
+                let _ = webbrowser::open(&pkg_info_1.url);
             }
         ));
+
+        let pkg_id = package_info.id.clone();
+        let tx_clone = tx.clone();
+        let obj_for_add = obj.clone();
+
+        imp.add_button.connect_clicked(move |_| {
+            let imp_inner = obj_for_add.imp();
+            imp_inner.on_add_btn_clicked(&tx_clone, &pkg_id);
+        });
         obj
     }
 }
 
 impl imp::Card {
+    pub fn show(&self, package: &PackageInfo) {
+        self.is_added.set(false);
+        self.title_label.set_label(&package.name);
+        self.desc_label.set_label(&package.description);
+
+        match package.icon.as_deref() {
+            Some(icon) => {
+                self.fetch_icon(icon);
+            }
+            None => {
+                let image: &gtk::Image = &self.package_icon.as_ref();
+                image.set_icon_name(Some("application-x-executable-symbolic"));
+            }
+        }
+    }
+
+    pub fn on_details_button_clicked(&self, package: &PackageInfo) {
+        let _ = webbrowser::open(&package.url);
+    }
+
+    pub fn on_add_btn_clicked(&self, tx: &Sender<Event>, package_id: &str) {
+        let tx = tx.clone();
+        let current = self.is_added.get();
+        self.is_added.set(!current);
+
+        if !current {
+            self.add_button.set_label("Unselect");
+            self.add_button.remove_css_class("suggested-action");
+        } else {
+            self.add_button.set_label("Add");
+            self.add_button.add_css_class("suggested-action");
+        }
+
+        let package_id = package_id.to_string();
+        glib::spawn_future_local(clone!(async move {
+            let _ = tx
+                .send(Event {
+                    name: "select-package".to_owned(),
+                    package_id: package_id.clone().to_owned(),
+                })
+                .await;
+        }));
+    }
+
     pub fn fetch_icon(&self, icon_url: &str) {
         let icon_url = icon_url.to_owned();
         let app_icon_widget = self.package_icon.clone();

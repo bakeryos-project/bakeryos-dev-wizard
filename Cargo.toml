@@ -1,5 +1,5 @@
 [package]
-name = "BakeryOSDevWizard"
+name = "bakeryos-dev-wizard"
 version = "0.1.0"
 edition = "2021"
 

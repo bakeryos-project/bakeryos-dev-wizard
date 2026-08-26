@@ -10,7 +10,7 @@ pub struct PackageInfo {
     pub icon: Option<String>,
     #[serde(default)]
     pub group: PackageGroup,
-    pub install_source: PackageInstallSource,
+    pub install_steps: Vec<PackageInstallStep>,
 }
 
 #[derive(Debug, Default, Deserialize, Serialize, Clone)]
@@ -29,16 +29,16 @@ pub enum PackageGroup {
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(tag = "type", content = "data", rename_all = "snake_case")]
-pub enum PackageInstallSource {
-    Flathub(FlathubPackageMetadata),
-    Pacman(PacmanPackageMetadata),
-
-    CustomScript(CustomScript),
+pub enum PackageInstallStep {
+    InstallFromFlathub(InstallFromFlathubConfig),
+    InstallFromPacman(InstallFromPacmanConfig),
+    RunCustomScript(RunCustomScriptConfig),
+    RunInTerminal(RunInTerminalConfig),
 }
 
-impl Default for PackageInstallSource {
+impl Default for PackageInstallStep {
     fn default() -> Self {
-        Self::CustomScript(CustomScript {
+        Self::RunCustomScript(RunCustomScriptConfig {
             script: String::new(),
         })
     }
@@ -46,20 +46,26 @@ impl Default for PackageInstallSource {
 
 #[derive(Debug, Default, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "snake_case")]
-pub struct FlathubPackageMetadata {
+pub struct InstallFromFlathubConfig {
     pub id: String,
     pub repository: Option<String>,
 }
 
 #[derive(Debug, Default, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "snake_case")]
-pub struct PacmanPackageMetadata {
+pub struct InstallFromPacmanConfig {
     pub id: String,
     pub repository: Option<String>,
 }
 
 #[derive(Debug, Default, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "snake_case")]
-pub struct CustomScript {
+pub struct RunCustomScriptConfig {
+    pub script: String,
+}
+
+#[derive(Debug, Default, Deserialize, Serialize, Clone)]
+#[serde(rename_all = "snake_case")]
+pub struct RunInTerminalConfig {
     pub script: String,
 }

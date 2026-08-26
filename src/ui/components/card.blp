@@ -75,6 +75,15 @@ template $Card: Gtk.FlowBoxChild {
         hexpand: true;
         valign: end;
 
+        Gtk.Button details_button {
+          label: "Details";
+          hexpand: true;
+
+          styles [
+            "flat",
+          ]
+        }
+
         Gtk.Button add_button {
           label: "Add";
           hexpand: true;
@@ -84,14 +93,6 @@ template $Card: Gtk.FlowBoxChild {
           ]
         }
 
-        Gtk.Button details_button {
-          label: "Details";
-          hexpand: true;
-
-          styles [
-            "flat",
-          ]
-        }
       }
     };
   };
