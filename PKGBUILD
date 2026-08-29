@@ -8,7 +8,7 @@ arch=('x86_64')
 url="https://github.com/bakeryos-project/bakeryos-dev-wizard"
 license=('GPL-3.0-or-later')
 depends=('gtk4' 'libadwaita' 'glib2')
-makedepends=('meson' 'rust' 'cargo' 'blueprint-compiler')
+makedepends=('base-devel' 'meson' 'rust' 'cargo' 'blueprint-compiler' 'clang' 'lld')
 source=()
 sha256sums=()
 
