@@ -1,21 +1,25 @@
-# Maintainer: smtdfc <smtdfc@bakeryos.smtdfc.net>
+# Maintainer: smtdfc <me.smtdfc@gmail.com>
+
 pkgname=bakeryos-dev-wizard
-pkgver=1.0.0
+pkgver=0.1.1
 pkgrel=1
-pkgdesc="Dev Wizard for BakeryOS"
+pkgdesc="A post-installation setup wizard and developer environment installer for BakeryOS."
 arch=('x86_64')
-url="https://github.com/smtdfc/bakeryos-dev-wizard"
-license=('GPL3')
-depends=('gtk4' 'glib2')
-makedepends=('meson' 'ninja' 'rust' 'cargo')
-source=("$pkgname::git+file://$PWD")
-sha256sums=('SKIP')
+url="https://github.com/bakeryos-project/bakeryos-dev-wizard"
+license=('GPL-3.0-or-later')
+depends=('gtk4' 'libadwaita' 'glib2')
+makedepends=('meson' 'rust' 'cargo' 'blueprint-compiler')
+source=()
+sha256sums=()
 
 build() {
-    arch-meson "$pkgname" build
-    ninja -C build
+    cd $startdir
+
+    arch-meson . build
+    meson compile -C build
 }
 
 package() {
-    DESTDIR="$pkgdir" ninja -C build install
+    cd $startdir
+    meson install -C build --destdir "$pkgdir"
 }

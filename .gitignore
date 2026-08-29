@@ -3,6 +3,6 @@ target
 pkg
 **/bakeryos-dev-wizard
 *.zst
-build-dir
+builddir
 .flatpak-builder
 *.flatpak

@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=BakeryOSDevWizard
-Exec=BakeryOSDevWizard
+Name=BakeryOS Dev Wizard
+Exec=bakeryos-dev-wizard
 Icon=org.bakeryos.devwizard
 Terminal=false
 Type=Application

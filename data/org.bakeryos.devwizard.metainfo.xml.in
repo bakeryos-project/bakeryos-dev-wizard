@@ -4,14 +4,16 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
 
-  <name>BakeryOSDevWizard</name>
-  <summary>Keep the summary shorter, between 10 and 35 characters</summary>
+  <name>BakeryOS Dev Wizard</name>
+  <summary
+    >A post-installation setup wizard and developer environment installer for BakeryOS</summary>
   <description>
-    <p>No description</p>
+    <p
+        >BakeryOS Dev Wizard is a post-installation setup wizard and developer environment installer for **BakeryOS**. Built with **Rust**, **GTK 4**, and **Libadwaita**, it provides a modern, clean, and intuitive user interface to help developers easily configure their system and install development tools, runtimes, and applications.</p>
   </description>
 
   <developer id="tld.vendor">
-    <name>Developer name</name>
+    <name>smtdfc</name>
   </developer>
 
   <!-- Required: Should be a link to the upstream homepage for the component -->
