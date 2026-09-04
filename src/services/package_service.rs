@@ -1,4 +1,4 @@
-use std::process::Command;
+use std::process::{Command, Stdio};
 
 use crate::models::package_info::{
     InstallFromFlathubConfig, InstallFromPacmanConfig, PackageInfo, PackageInstallStep,
@@ -53,11 +53,12 @@ impl PackageService {
 
     pub fn install_from_pacman(config: &InstallFromPacmanConfig) -> Result<(), String> {
         let status = std::process::Command::new("pkexec")
-            .arg("pkexec")
             .arg("pacman")
             .arg("-S")
             .arg("--noconfirm")
             .arg(&config.id)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
             .status()
             .map_err(|e| format!("Failed to execute pacman: {}", e))?;
 

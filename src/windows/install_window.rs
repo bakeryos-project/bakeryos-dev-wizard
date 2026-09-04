@@ -1,9 +1,11 @@
 use adw::prelude::{ActionRowExt, PreferencesRowExt};
 use adw::subclass::prelude::*;
+use async_channel::Sender;
 use gtk::glib::clone;
 use gtk::prelude::*;
 use gtk::{gio, glib};
 
+use crate::models::event::Event;
 use crate::models::package_info::PackageInfo;
 use crate::services::package_service::PackageService;
 
@@ -54,14 +56,14 @@ glib::wrapper! {
 }
 
 impl InstallProgressWindow {
-    pub fn new(packages: Vec<PackageInfo>) -> Self {
+    pub fn new(packages: Vec<PackageInfo>, sender: Sender<Event>) -> Self {
         let obj: Self = glib::Object::new();
 
         glib::spawn_future_local(clone!(
             #[strong]
             obj,
             async move {
-                obj.imp().start_install(packages).await;
+                obj.imp().start_install(packages, sender).await;
             }
         ));
 
@@ -70,7 +72,7 @@ impl InstallProgressWindow {
 }
 
 impl imp::InstallProgressWindow {
-    pub async fn start_install(&self, packages: Vec<PackageInfo>) {
+    pub async fn start_install(&self, packages: Vec<PackageInfo>, sender: Sender<Event>) {
         match PackageService::authenticate() {
             Ok(_) => {}
             Err(e) => {
@@ -95,6 +97,12 @@ impl imp::InstallProgressWindow {
                 Ok(_) => {
                     row.set_subtitle("Installed");
                     row.add_prefix(&gtk::Image::from_icon_name("object-select-symbolic"));
+                    let _ = sender
+                        .send(Event {
+                            name: "unselect-package".to_owned(),
+                            package_id: package.id.clone(),
+                        })
+                        .await;
                 }
                 Err(e) => {
                     eprintln!("Failed {}: {}", package.name, e);
@@ -106,6 +114,12 @@ impl imp::InstallProgressWindow {
         }
 
         self.show_done_status();
+        let _ = sender
+            .send(Event {
+                name: "install-completed".to_owned(),
+                package_id: String::new(),
+            })
+            .await;
     }
 
     pub fn show_err_status(&self, err: &str) {

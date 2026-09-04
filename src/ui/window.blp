@@ -8,7 +8,24 @@ template $MainWindow: Adw.ApplicationWindow {
 
     content: Adw.ToolbarView {
         [top]
-        Adw.HeaderBar {}
+        Adw.HeaderBar {
+            [end]
+            Gtk.ToggleButton search_button {
+                icon-name: "system-search-symbolic";
+                tooltip-text: _("Search packages");
+            }
+        }
+
+        [top]
+        Gtk.SearchBar search_bar {
+            search-mode-enabled: bind search_button.active bidirectional;
+            child: Gtk.SearchEntry search_entry {
+                placeholder-text: _("Search packages…");
+                hexpand: true;
+                max-width-chars: 35;
+                width-request: 230;
+            };
+        }
 
         content: Gtk.Box {
             orientation: vertical;
@@ -20,16 +37,28 @@ template $MainWindow: Adw.ApplicationWindow {
             margin-end: 20;
             spacing: 15;
 
-            Adw.ViewSwitcher view_switcher {
-                stack: stack;
-                halign: center;
-                policy:wide;
-            }
-
-
-            Adw.ViewStack stack {
+            Gtk.Stack content_stack {
                 vexpand: true;
                 hexpand: true;
+                transition-type: crossfade;
+
+                Gtk.StackPage {
+                    name: "categories";
+                    child: Gtk.Box {
+                        orientation: vertical;
+                        vexpand: true;
+                        hexpand: true;
+                        spacing: 15;
+
+                        Adw.ViewSwitcher view_switcher {
+                            stack: stack;
+                            halign: center;
+                            policy: wide;
+                        }
+
+                        Adw.ViewStack stack {
+                            vexpand: true;
+                            hexpand: true;
 
                 Adw.ViewStackPage {
                     name: "code_editor";
@@ -205,9 +234,69 @@ template $MainWindow: Adw.ApplicationWindow {
                         };
                     };
                 }
+                        }
+                    };
+                }
+
+                Gtk.StackPage {
+                    name: "search";
+                    child: Gtk.Box {
+                        orientation: vertical;
+                        vexpand: true;
+                        hexpand: true;
+                        spacing: 10;
+
+                        Gtk.Label search_summary_label {
+                            halign: start;
+                            margin-start: 4;
+                            styles [
+                                "dim-label",
+                            ]
+                        }
+
+                        Gtk.Stack search_result_stack {
+                            vexpand: true;
+                            hexpand: true;
+                            transition-type: crossfade;
+
+                            Gtk.StackPage {
+                                name: "results";
+                                child: Gtk.ScrolledWindow {
+                                    vexpand: true;
+                                    hexpand: true;
+
+                                    child: Gtk.FlowBox search_packages {
+                                        valign: start;
+                                        hexpand: true;
+                                        homogeneous: true;
+
+                                        row-spacing: 12;
+                                        column-spacing: 12;
+
+                                        min-children-per-line: 3;
+                                        max-children-per-line: 3;
+
+                                        selection-mode: none;
+                                    };
+                                };
+                            }
+
+                            Gtk.StackPage {
+                                name: "empty";
+                                child: Adw.StatusPage search_empty_page {
+                                    icon-name: "system-search-symbolic";
+                                    title: _("No Packages Found");
+                                    description: _("Try searching with different keywords");
+                                    vexpand: true;
+                                    hexpand: true;
+                                };
+                            }
+                        }
+                    };
+                }
             }
 
-            Gtk.Button install_button{
+            Gtk.Button install_button {
                 label: "Install Selected Packages";
                 css-classes: ["suggested-action", "pill"];
                 halign: center;

@@ -9,8 +9,16 @@ use gtk::{gio, glib};
 use crate::models::event::Event;
 use crate::models::package_info::PackageInfo;
 
+static ICON_CACHE: std::sync::OnceLock<
+    std::sync::Mutex<std::collections::HashMap<String, glib::Bytes>>,
+> = std::sync::OnceLock::new();
+
+fn icon_cache() -> &'static std::sync::Mutex<std::collections::HashMap<String, glib::Bytes>> {
+    ICON_CACHE.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()))
+}
+
 mod imp {
-    use std::cell::Cell;
+    use std::cell::{Cell, RefCell};
 
     use super::*;
 
@@ -20,6 +28,8 @@ mod imp {
     pub struct Card {
         #[property(get, set)]
         pub is_added: Cell<bool>,
+
+        pub package_id: RefCell<String>,
 
         #[template_child]
         pub title_label: TemplateChild<gtk::Label>,
@@ -68,6 +78,7 @@ impl Card {
         let obj: Card = glib::Object::new();
         let imp = obj.imp();
         imp.is_added.set(false);
+        imp.package_id.replace(package_info.id.clone());
         imp.show(&package_info);
 
         let pkg_info_1 = package_info.clone();
@@ -89,6 +100,14 @@ impl Card {
         });
         obj
     }
+
+    pub fn package_id(&self) -> String {
+        self.imp().package_id.borrow().clone()
+    }
+
+    pub fn set_selected(&self, selected: bool) {
+        self.imp().set_selected(selected);
+    }
 }
 
 impl imp::Card {
@@ -102,9 +121,20 @@ impl imp::Card {
                 self.fetch_icon(icon);
             }
             None => {
-                let image: &gtk::Image = &self.package_icon.as_ref();
+                let image: &gtk::Image = self.package_icon.as_ref();
                 image.set_icon_name(Some("application-x-executable-symbolic"));
             }
+        }
+    }
+
+    pub fn set_selected(&self, selected: bool) {
+        self.is_added.set(selected);
+        if selected {
+            self.add_button.set_label("Unselect");
+            self.add_button.remove_css_class("suggested-action");
+        } else {
+            self.add_button.set_label("Add");
+            self.add_button.add_css_class("suggested-action");
         }
     }
 
@@ -115,15 +145,7 @@ impl imp::Card {
     pub fn on_add_btn_clicked(&self, tx: &Sender<Event>, package_id: &str) {
         let tx = tx.clone();
         let current = self.is_added.get();
-        self.is_added.set(!current);
-
-        if !current {
-            self.add_button.set_label("Unselect");
-            self.add_button.remove_css_class("suggested-action");
-        } else {
-            self.add_button.set_label("Add");
-            self.add_button.add_css_class("suggested-action");
-        }
+        self.set_selected(!current);
 
         let package_id = package_id.to_string();
         glib::spawn_future_local(clone!(async move {
@@ -137,12 +159,22 @@ impl imp::Card {
     }
 
     pub fn fetch_icon(&self, icon_url: &str) {
+        if let Some(cached_bytes) = icon_cache().lock().unwrap().get(icon_url) {
+            if let Ok(texture) = gtk::gdk::Texture::from_bytes(cached_bytes) {
+                let image: &gtk::Image = self.package_icon.as_ref();
+                image.set_property("paintable", &texture);
+                return;
+            }
+        }
+
         let icon_url = icon_url.to_owned();
         let app_icon_widget = self.package_icon.clone();
 
         glib::spawn_future_local(async move {
+            let download_url = icon_url.clone();
             let download_result = gio::spawn_blocking(move || {
-                let response = ureq::get(&icon_url).call()?;
+                use std::io::Read;
+                let response = ureq::get(&download_url).call()?;
 
                 let mut bytes_data = Vec::new();
                 response.into_reader().read_to_end(&mut bytes_data)?;
@@ -154,6 +186,10 @@ impl imp::Card {
             match download_result {
                 Ok(Ok(bytes_data)) => {
                     let bytes = glib::Bytes::from(&bytes_data);
+                    icon_cache()
+                        .lock()
+                        .unwrap()
+                        .insert(icon_url, bytes.clone());
                     if let Ok(texture) = gtk::gdk::Texture::from_bytes(&bytes) {
                         let image: &gtk::Image = app_icon_widget.as_ref();
                         image.set_property("paintable", &texture);
