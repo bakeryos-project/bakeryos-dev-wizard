@@ -26,5 +26,5 @@ build() {
 
 package() {
     cd $startdir
-    meson install -C build --destdir "$pkgdir"
+    meson install -C build --no-rebuild --destdir "$pkgdir"
 }
