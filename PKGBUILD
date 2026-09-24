@@ -1,7 +1,7 @@
 # Maintainer: smtdfc <me.smtdfc@gmail.com>
 
 pkgname=bakeryos-dev-wizard
-pkgver=0.1.5
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="A post-installation setup wizard and developer environment installer for BakeryOS."
 arch=('x86_64')
@@ -11,6 +11,7 @@ depends=('gtk4' 'libadwaita' 'glib2' 'zenity')
 makedepends=('base-devel' 'meson' 'rust' 'cargo' 'blueprint-compiler' 'clang' 'lld' 'gcc')
 source=()
 sha256sums=()
+options=(!debug !strip)
 
 build() {
     cd $startdir
