@@ -1,7 +1,7 @@
 # Maintainer: smtdfc <me.smtdfc@gmail.com>
 
 pkgname=bakeryos-dev-wizard
-pkgver=0.1.4
+pkgver=0.1.5
 pkgrel=1
 pkgdesc="A post-installation setup wizard and developer environment installer for BakeryOS."
 arch=('x86_64')
