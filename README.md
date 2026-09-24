@@ -39,18 +39,18 @@ Before building from source, ensure you have the following dependencies installe
 
 ```bash
 # Setup build directory
-meson setup builddir
+meson setup build
 
 # Compile the project
-meson compile -C builddir
+meson compile -C build
 
 # Run the compiled executable directly
-./builddir/src/bakeryos-dev-wizard
+./build/src/bakeryos-dev-wizard
 ```
 
 Installing System-wide
 
 ```bash
 # Install to system (default prefix is /usr/local)
-sudo meson install -C builddir
+sudo meson install -C build
 ```

@@ -60,8 +60,6 @@ mod imp {
         #[template_child]
         pub programming_language_packages: TemplateChild<gtk::FlowBox>,
 
-        #[template_child]
-        pub framework_packages: TemplateChild<gtk::FlowBox>,
 
         #[template_child]
         pub tooling_packages: TemplateChild<gtk::FlowBox>,
@@ -217,10 +215,6 @@ impl imp::MainWindow {
                     self.programming_language_packages.append(&card);
                 }
 
-                PackageGroup::Framework => {
-                    self.framework_packages.append(&card);
-                }
-
                 PackageGroup::Tooling => {
                     self.tooling_packages.append(&card);
                 }
@@ -236,6 +230,8 @@ impl imp::MainWindow {
                 PackageGroup::Other => {
                     self.other_packages.append(&card);
                 }
+
+                _ => {}
             }
         }
     }

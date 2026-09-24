@@ -3,49 +3,64 @@
     "id": "vscode",
     "name": "Visual Studio Code",
     "description": "Code editing. Redefined. Build and debug modern web and cloud applications.",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.visualstudio.code.png",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",
     "group": "code_editor",
     "url": "https://code.visualstudio.com",
     "install_steps": [
       {
-        "type": "install_from_flathub",
+        "type": "run_custom_script",
         "data": {
-          "id": "com.visualstudio.code",
-          "repository": "flathub"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && yay -S visual-studio-code-bin --noconfirm --answerdiff=None --answerclean=None --answeredit=None"
         }
       }
     ]
   },
   {
-    "id": "zed",
+    "id": "zed-editor",
     "name": "Zed",
-    "description": "High-performance code editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/dev.zed.Zed.png",
+    "description": "Zed is a minimal code editor crafted for speed and collaboration with humans and AI..",
+    "icon": "",
     "group": "code_editor",
-    "url": "https://zed.dev",
+    "url": "https://zed.dev/",
     "install_steps": [
       {
-        "type": "install_from_flathub",
+        "type": "run_custom_script",
         "data": {
-          "id": "dev.zed.Zed",
-          "repository": "flathub"
+          "script": "curl -f https://zed.dev/install.sh | sh"
         }
       }
     ]
   },
   {
-    "id": "vim",
-    "name": "Vim",
-    "description": "The ubiquitous text editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/org.vim.Vim.png",
+    "id": "sublime-text",
+    "name": "Sublime Text",
+    "description": "Text Editing, Done Right.",
+    "icon": "",
     "group": "code_editor",
-    "url": "https://www.vim.org",
+    "url": "https://www.sublimetext.com/",
     "install_steps": [
       {
-        "type": "install_from_flathub",
+        "type": "run_custom_script",
         "data": {
-          "id": "org.vim.Vim",
-          "repository": "flathub"
+          "script": "curl -O https://download.sublimetext.com/sublimehq-pub.gpg"
+        }
+      },
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman-key --add sublimehq-pub.gpg && sudo -A pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg"
+        }
+      },
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  echo -e \"\\n[sublime-text]\\nServer = https://download.sublimetext.com/arch/stable/x86_64\" | sudo -A tee -a /etc/pacman.conf"
+        }
+      },
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -Syu --noconfirm sublime-text"
         }
       }
     ]
@@ -53,2707 +68,108 @@
   {
     "id": "neovim",
     "name": "Neovim",
-    "description": "Vim-fork focused on extensibility and usability",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/io.neovim.nvim.png",
+    "description": "hyperextensible Vim-based text editor",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/neovim/neovim-original.svg",
     "group": "code_editor",
-    "url": "https://neovim.io",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "io.neovim.nvim",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "helix",
-    "name": "Helix",
-    "description": "A post-modern text editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.helix_editor.Helix.png",
-    "group": "code_editor",
-    "url": "https://helix-editor.com",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.helix_editor.Helix",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "kate",
-    "name": "Kate",
-    "description": "Fast and powerful text editor with LSP, Git integration, multiple cursors, terminal, and project support.",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/org.kde.kate.png",
-    "group": "code_editor",
-    "url": "https://kate-editor.org",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "org.kde.kate",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "builder",
-    "name": "GNOME Builder",
-    "description": "IDE for GNOME and Linux development with Git, LSP, debugging, and build system integration.",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/org.gnome.Builder.png",
-    "group": "code_editor",
-    "url": "https://apps.gnome.org/Builder",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "org.gnome.Builder",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "emacs",
-    "name": "GNU Emacs",
-    "description": "Extensible and highly customizable text editor with a powerful Lisp environment.",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/org.gnu.emacs.png",
-    "group": "code_editor",
-    "url": "https://www.gnu.org/software/emacs",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "org.gnu.emacs",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "lapce",
-    "name": "Lapce",
-    "description": "Lightning-fast code editor written in Rust with native GUI, GPU rendering, LSP, plugins, and remote development.",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/dev.lapce.lapce.png",
-    "group": "code_editor",
-    "url": "https://lapce.dev",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "dev.lapce.lapce",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "pulsar",
-    "name": "Pulsar",
-    "description": "Community-led and highly customizable text editor inspired by the Atom editor.",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/dev.pulsar_edit.Pulsar.png",
-    "group": "code_editor",
-    "url": "https://pulsar-edit.dev",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "dev.pulsar_edit.Pulsar",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "intellij-idea-Ultimate",
-    "name": "IntelliJ IDEA Ultimate",
-    "description": "Capable and ergonomic Java IDE, with support for Kotlin, Scala, and more.",
-    "group": "code_editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.jetbrains.IntelliJ-IDEA-Ultimate.png",
-    "url": "https://www.jetbrains.com/idea",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.jetbrains.IntelliJ-IDEA-Ultimate",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "pycharmn",
-    "name": "PyCharm",
-    "description": "Professional Python IDE with great developer tooling and database support.",
-    "group": "code_editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.jetbrains.PyCharm-Professional.png",
-    "url": "https://www.jetbrains.com/pycharm",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.jetbrains.PyCharm-Professional",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "webstorm",
-    "name": "WebStorm",
-    "description": "JavaScript and TypeScript IDE",
-    "group": "code_editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.jetbrains.WebStorm.png",
-    "url": "https://www.jetbrains.com/webstorm",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.jetbrains.WebStorm",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "clion",
-    "name": "CLion",
-    "description": "Cross-platform C and C++ IDE built on the IntelliJ platform.",
-    "group": "code_editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.jetbrains.CLion.png",
-    "url": "https://www.jetbrains.com/clion",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.jetbrains.CLion",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "goland",
-    "name": "GoLand",
-    "description": "Capable and ergonomic Go IDE by JetBrains.",
-    "group": "code_editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.jetbrains.GoLand.png",
-    "url": "https://www.jetbrains.com/go",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.jetbrains.GoLand",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "rider",
-    "name": "Rider",
-    "description": "Fast & powerful, cross platform .NET IDE",
-    "group": "code_editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.jetbrains.Rider.png",
-    "url": "https://www.jetbrains.com/rider",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.jetbrains.Rider",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "android-studio",
-    "name": "Android Studio",
-    "description": "The official IDE for Android development, built on IntelliJ IDEA.",
-    "group": "code_editor",
-    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.google.AndroidStudio.png",
-    "url": "https://developer.android.com/studio",
-    "install_steps": [
-      {
-        "type": "install_from_flathub",
-        "data": {
-          "id": "com.google.AndroidStudio",
-          "repository": "flathub"
-        }
-      }
-    ]
-  },
-  {
-    "id": "c",
-    "name": "C",
-    "description": "A foundational systems programming language used for operating systems, embedded software, and high-performance applications.",
-    "group": "programming_language",
-    "url": "https://www.iso.org/standard/74528.html",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gcc"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cpp",
-    "name": "C++",
-    "description": "A high-performance general-purpose language widely used for systems, games, desktop applications, and performance-critical software.",
-    "group": "programming_language",
-    "url": "https://isocpp.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gcc"
-        }
-      }
-    ]
-  },
-  {
-    "id": "csharp",
-    "name": "C#",
-    "description": "A modern general-purpose language commonly used for .NET applications, desktop software, web services, and game development.",
-    "group": "programming_language",
-    "url": "https://learn.microsoft.com/en-us/dotnet/csharp",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "dotnet-sdk"
-        }
-      }
-    ]
-  },
-  {
-    "id": "rust",
-    "name": "Rust",
-    "description": "A modern systems programming language focused on safety, performance, and concurrency.",
-    "group": "programming_language",
-    "url": "https://www.rust-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "rustup"
-        }
-      }
-    ]
-  },
-  {
-    "id": "go",
-    "name": "Go",
-    "description": "A compiled language designed for simplicity, concurrency, networking, and scalable backend systems.",
-    "group": "programming_language",
-    "url": "https://go.dev",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "go"
-        }
-      }
-    ]
-  },
-  {
-    "id": "zig",
-    "name": "Zig",
-    "description": "A general-purpose systems programming language focused on robustness, performance, and explicit control.",
-    "group": "programming_language",
-    "url": "https://ziglang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "zig"
-        }
-      }
-    ]
-  },
-  {
-    "id": "d",
-    "name": "D",
-    "description": "A systems programming language combining native performance with high-level language features.",
-    "group": "programming_language",
-    "url": "https://dlang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "dlang"
-        }
-      }
-    ]
-  },
-  {
-    "id": "java",
-    "name": "Java",
-    "description": "A mature object-oriented language used for enterprise software, backend services, Android development, and large-scale systems.",
-    "group": "programming_language",
-    "url": "https://www.java.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "jdk-openjdk"
-        }
-      }
-    ]
-  },
-  {
-    "id": "kotlin",
-    "name": "Kotlin",
-    "description": "A modern JVM language with concise syntax, null safety, and strong interoperability with Java.",
-    "group": "programming_language",
-    "url": "https://kotlinlang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "kotlin"
-        }
-      }
-    ]
-  },
-  {
-    "id": "scala",
-    "name": "Scala",
-    "description": "A JVM language combining object-oriented and functional programming.",
-    "group": "programming_language",
-    "url": "https://www.scala-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "scala"
-        }
-      }
-    ]
-  },
-  {
-    "id": "groovy",
-    "name": "Groovy",
-    "description": "A dynamic JVM language commonly used for scripting, automation, and build systems.",
-    "group": "programming_language",
-    "url": "https://groovy-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "groovy"
-        }
-      }
-    ]
-  },
-  {
-    "id": "python",
-    "name": "Python",
-    "description": "A versatile high-level language widely used for automation, web development, data science, AI, and scripting.",
-    "group": "programming_language",
-    "url": "https://www.python.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "python"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ruby",
-    "name": "Ruby",
-    "description": "A dynamic language focused on developer productivity and elegant object-oriented programming.",
-    "group": "programming_language",
-    "url": "https://www.ruby-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ruby"
-        }
-      }
-    ]
-  },
-  {
-    "id": "php",
-    "name": "PHP",
-    "description": "A server-side scripting language widely used for web applications and dynamic websites.",
-    "group": "programming_language",
-    "url": "https://www.php.net",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "php"
-        }
-      }
-    ]
-  },
-  {
-    "id": "javascript",
-    "name": "JavaScript",
-    "description": "The primary programming language of the web, also widely used for servers, desktop applications, and tooling.",
-    "group": "programming_language",
-    "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "nodejs"
-        }
-      }
-    ]
-  },
-  {
-    "id": "typescript",
-    "name": "TypeScript",
-    "description": "A statically typed superset of JavaScript designed for large-scale application development.",
-    "group": "programming_language",
-    "url": "https://www.typescriptlang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "typescript"
-        }
-      }
-    ]
-  },
-  {
-    "id": "dart",
-    "name": "Dart",
-    "description": "A client-optimized language used primarily with the Flutter framework for cross-platform applications.",
-    "group": "programming_language",
-    "url": "https://dart.dev",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "dart"
-        }
-      }
-    ]
-  },
-  {
-    "id": "swift",
-    "name": "Swift",
-    "description": "A modern compiled language designed by Apple for safe and high-performance application development.",
-    "group": "programming_language",
-    "url": "https://www.swift.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "swift"
-        }
-      }
-    ]
-  },
-  {
-    "id": "objective-c",
-    "name": "Objective-C",
-    "description": "An object-oriented language historically used extensively for Apple platform development.",
-    "group": "programming_language",
-    "url": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gcc"
-        }
-      }
-    ]
-  },
-  {
-    "id": "lua",
-    "name": "Lua",
-    "description": "A lightweight embeddable scripting language commonly used in games, applications, and configuration systems.",
-    "group": "programming_language",
-    "url": "https://www.lua.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "lua"
-        }
-      }
-    ]
-  },
-  {
-    "id": "perl",
-    "name": "Perl",
-    "description": "A mature scripting language known for text processing, automation, and system administration.",
-    "group": "programming_language",
-    "url": "https://www.perl.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "perl"
-        }
-      }
-    ]
-  },
-  {
-    "id": "r",
-    "name": "R",
-    "description": "A programming language and environment specialized in statistics, data analysis, and visualization.",
-    "group": "programming_language",
-    "url": "https://www.r-project.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "r"
-        }
-      }
-    ]
-  },
-  {
-    "id": "julia",
-    "name": "Julia",
-    "description": "A high-performance language designed for numerical computing, scientific computing, and data science.",
-    "group": "programming_language",
-    "url": "https://julialang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "julia"
-        }
-      }
-    ]
-  },
-  {
-    "id": "haskell",
-    "name": "Haskell",
-    "description": "A purely functional programming language known for strong static typing and lazy evaluation.",
-    "group": "programming_language",
-    "url": "https://www.haskell.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ghc"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ocaml",
-    "name": "OCaml",
-    "description": "A functional programming language combining expressive type systems with native compilation.",
-    "group": "programming_language",
-    "url": "https://ocaml.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ocaml"
-        }
-      }
-    ]
-  },
-  {
-    "id": "fsharp",
-    "name": "F#",
-    "description": "A functional-first language on .NET designed for concise, robust, and data-oriented programming.",
-    "group": "programming_language",
-    "url": "https://fsharp.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "dotnet-sdk"
-        }
-      }
-    ]
-  },
-  {
-    "id": "elixir",
-    "name": "Elixir",
-    "description": "A functional language built on the Erlang VM, designed for scalable and fault-tolerant applications.",
-    "group": "programming_language",
-    "url": "https://elixir-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "elixir"
-        }
-      }
-    ]
-  },
-  {
-    "id": "erlang",
-    "name": "Erlang",
-    "description": "A concurrent functional language designed for highly available and fault-tolerant distributed systems.",
-    "group": "programming_language",
-    "url": "https://www.erlang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "erlang"
-        }
-      }
-    ]
-  },
-  {
-    "id": "clojure",
-    "name": "Clojure",
-    "description": "A modern Lisp dialect targeting the JVM and designed around functional programming and immutability.",
-    "group": "programming_language",
-    "url": "https://clojure.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "clojure"
-        }
-      }
-    ]
-  },
-  {
-    "id": "common-lisp",
-    "name": "Common Lisp",
-    "description": "A powerful programmable Lisp language with a mature macro system and dynamic development environment.",
-    "group": "programming_language",
-    "url": "https://common-lisp.net",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "sbcl"
-        }
-      }
-    ]
-  },
-  {
-    "id": "scheme",
-    "name": "Scheme",
-    "description": "A minimalist Lisp-family language emphasizing lexical scope, functional programming, and language experimentation.",
-    "group": "programming_language",
-    "url": "https://www.scheme.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "chez-scheme"
-        }
-      }
-    ]
-  },
-  {
-    "id": "fortran",
-    "name": "Fortran",
-    "description": "A long-standing compiled language heavily used in scientific computing and numerical simulation.",
-    "group": "programming_language",
-    "url": "https://fortran-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gcc-fortran"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ada",
-    "name": "Ada",
-    "description": "A strongly typed language designed for reliable, maintainable, and safety-critical systems.",
-    "group": "programming_language",
-    "url": "https://ada-lang.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gcc-ada"
-        }
-      }
-    ]
-  },
-  {
-    "id": "pascal",
-    "name": "Pascal",
-    "description": "A structured programming language historically important in education and still used through modern Pascal implementations.",
-    "group": "programming_language",
-    "url": "https://www.freepascal.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "fpc"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cobol",
-    "name": "COBOL",
-    "description": "A business-oriented programming language still used in large-scale financial and enterprise systems.",
-    "group": "programming_language",
-    "url": "https://gnucobol.sourceforge.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gnucobol"
-        }
-      }
-    ]
-  },
-  {
-    "id": "crystal",
-    "name": "Crystal",
-    "description": "A compiled language with Ruby-inspired syntax and static typing.",
-    "group": "programming_language",
-    "url": "https://crystal-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "crystal"
-        }
-      }
-    ]
-  },
-  {
-    "id": "nim",
-    "name": "Nim",
-    "description": "A statically typed compiled language combining high-level expressiveness with native performance.",
-    "group": "programming_language",
-    "url": "https://nim-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "nim"
-        }
-      }
-    ]
-  },
-  {
-    "id": "v",
-    "name": "V",
-    "description": "A simple compiled language designed for fast compilation, safety, and predictable performance.",
-    "group": "programming_language",
-    "url": "https://vlang.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "vlang"
-        }
-      }
-    ]
-  },
-  {
-    "id": "odin",
-    "name": "Odin",
-    "description": "A systems programming language designed for simplicity, clarity, and efficient native software.",
-    "group": "programming_language",
-    "url": "https://odin-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "odin"
-        }
-      }
-    ]
-  },
-  {
-    "id": "solidity",
-    "name": "Solidity",
-    "description": "A statically typed language used to write smart contracts for Ethereum-compatible blockchains.",
-    "group": "programming_language",
-    "url": "https://soliditylang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "solidity"
-        }
-      }
-    ]
-  },
-  {
-    "id": "move",
-    "name": "Move",
-    "description": "A resource-oriented programming language designed for secure smart contracts and blockchain applications.",
-    "group": "programming_language",
-    "url": "https://move-language.github.io/move",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "move"
-        }
-      }
-    ]
-  },
-  {
-    "id": "prolog",
-    "name": "Prolog",
-    "description": "A logic programming language based on relations, rules, and automated reasoning.",
-    "group": "programming_language",
-    "url": "https://www.swi-prolog.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "swi-prolog"
-        }
-      }
-    ]
-  },
-  {
-    "id": "bash",
-    "name": "Bash",
-    "description": "A Unix shell and scripting language widely used for automation, system administration, and development workflows.",
-    "group": "programming_language",
-    "url": "https://www.gnu.org/software/bash",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "bash"
-        }
-      }
-    ]
-  },
-  {
-    "id": "powershell",
-    "name": "PowerShell",
-    "description": "A cross-platform shell and scripting language designed for automation and system administration.",
-    "group": "programming_language",
-    "url": "https://learn.microsoft.com/en-us/powershell",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "powershell"
-        }
-      }
-    ]
-  },
-  {
-    "id": "sql",
-    "name": "SQL",
-    "description": "The standard language family for querying, manipulating, and defining relational database data.",
-    "group": "programming_language",
-    "url": "https://www.sqlite.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "sqlite"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gdscript",
-    "name": "GDScript",
-    "description": "A Python-like scripting language designed specifically for the Godot game engine.",
-    "group": "programming_language",
-    "url": "https://godotengine.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "godot"
-        }
-      }
-    ]
-  },
-  {
-    "id": "glsl",
-    "name": "GLSL",
-    "description": "A shading language used to program graphics pipelines through OpenGL and related technologies.",
-    "group": "programming_language",
-    "url": "https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "glslang"
-        }
-      }
-    ]
-  },
-  {
-    "id": "hlsl",
-    "name": "HLSL",
-    "description": "Microsoft's shading language for programmable graphics pipelines and GPU programming.",
-    "group": "programming_language",
-    "url": "https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "dxvk"
-        }
-      }
-    ]
-  },
-  {
-    "id": "wgsl",
-    "name": "WGSL",
-    "description": "The WebGPU Shading Language used for programmable GPU shaders in WebGPU.",
-    "group": "programming_language",
-    "url": "https://www.w3.org/TR/WGSL",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "naga"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cuda",
-    "name": "CUDA",
-    "description": "NVIDIA's programming platform and language extensions for general-purpose GPU computing.",
-    "group": "programming_language",
-    "url": "https://developer.nvidia.com/cuda-toolkit",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "cuda"
-        }
-      }
-    ]
-  },
-  {
-    "id": "verilog",
-    "name": "Verilog",
-    "description": "A hardware description language used to model and design digital electronic systems.",
-    "group": "programming_language",
-    "url": "https://iverilog.icarus.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "iverilog"
-        }
-      }
-    ]
-  },
-  {
-    "id": "systemverilog",
-    "name": "SystemVerilog",
-    "description": "An extended hardware description and verification language for digital hardware design.",
-    "group": "programming_language",
-    "url": "https://www.veripool.org/verilator",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "verilator"
-        }
-      }
-    ]
-  },
-  {
-    "id": "vhdl",
-    "name": "VHDL",
-    "description": "A hardware description language used for modeling, designing, and verifying digital systems.",
-    "group": "programming_language",
-    "url": "https://github.com/ghdl/ghdl",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ghdl"
-        }
-      }
-    ]
-  },
-  {
-    "id": "qt6",
-    "name": "Qt 6",
-    "description": "A cross-platform application development framework for creating desktop, mobile, and embedded software.",
-    "group": "framework",
-    "url": "https://www.qt.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "qt6-base"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gtk4",
-    "name": "GTK 4",
-    "description": "A multi-platform toolkit for creating graphical user interfaces used by GNOME applications.",
-    "group": "framework",
-    "url": "https://www.gtk.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gtk4"
-        }
-      }
-    ]
-  },
-  {
-    "id": "wxwidgets",
-    "name": "wxWidgets",
-    "description": "A cross-platform C++ framework for developing native desktop applications.",
-    "group": "framework",
-    "url": "https://www.wxwidgets.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "wxwidgets-gtk3"
-        }
-      }
-    ]
-  },
-  {
-    "id": "sdl2",
-    "name": "SDL2",
-    "description": "A cross-platform multimedia framework for graphics, audio, input, and game development.",
-    "group": "framework",
-    "url": "https://www.libsdl.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "sdl2"
-        }
-      }
-    ]
-  },
-  {
-    "id": "sfml",
-    "name": "SFML",
-    "description": "A multimedia framework providing graphics, audio, networking, and windowing for C++ applications.",
-    "group": "framework",
-    "url": "https://www.sfml-dev.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "sfml"
-        }
-      }
-    ]
-  },
-  {
-    "id": "raylib",
-    "name": "raylib",
-    "description": "A simple and easy-to-use programming framework for games, multimedia, and graphical applications.",
-    "group": "framework",
-    "url": "https://www.raylib.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "raylib"
-        }
-      }
-    ]
-  },
-  {
-    "id": "opencv",
-    "name": "OpenCV",
-    "description": "A computer vision and machine learning framework for image and video processing.",
-    "group": "framework",
-    "url": "https://opencv.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "opencv"
-        }
-      }
-    ]
-  },
-  {
-    "id": "poco",
-    "name": "POCO",
-    "description": "A modern C++ framework for building networked and cross-platform applications.",
-    "group": "framework",
-    "url": "https://pocoproject.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "poco"
-        }
-      }
-    ]
-  },
-  {
-    "id": "fltk",
-    "name": "FLTK",
-    "description": "A lightweight cross-platform GUI framework for creating fast desktop applications.",
-    "group": "framework",
-    "url": "https://www.fltk.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "fltk"
-        }
-      }
-    ]
-  },
-  {
-    "id": "boost",
-    "name": "Boost",
-    "description": "A collection of peer-reviewed C++ libraries for building robust and portable software.",
-    "group": "framework",
-    "url": "https://www.boost.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "boost"
-        }
-      }
-    ]
-  },
-  {
-    "id": "pcl",
-    "name": "Point Cloud Library",
-    "description": "A framework for 2D and 3D image processing, point cloud analysis, and computer vision.",
-    "group": "framework",
-    "url": "https://pointclouds.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "pcl"
-        }
-      }
-    ]
-  },
-  {
-    "id": "vtk",
-    "name": "VTK",
-    "description": "A software framework for 3D computer graphics, visualization, and image processing.",
-    "group": "framework",
-    "url": "https://vtk.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "vtk"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cegui",
-    "name": "CEGUI",
-    "description": "A flexible graphical user interface framework for games and real-time applications.",
-    "group": "framework",
-    "url": "http://cegui.org.uk",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "cegui"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cairo",
-    "name": "Cairo",
-    "description": "A 2D graphics library supporting multiple output devices with high-quality rendering.",
-    "group": "framework",
-    "url": "https://www.cairographics.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "cairo"
-        }
-      }
-    ]
-  },
-  {
-    "id": "glib",
-    "name": "GLib",
-    "description": "A low-level core library providing data structures, utilities, and portability for applications.",
-    "group": "framework",
-    "url": "https://docs.gtk.org/glib",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "glib2"
-        }
-      }
-    ]
-  },
-  {
-    "id": "glibmm",
-    "name": "glibmm",
-    "description": "The official C++ interface for the GLib core library.",
-    "group": "framework",
-    "url": "https://gnome.pages.gitlab.gnome.org/glibmm",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "glibmm"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gtkmm",
-    "name": "gtkmm",
-    "description": "The official C++ interface for GTK, enabling native desktop application development.",
-    "group": "framework",
-    "url": "https://www.gtkmm.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gtkmm-4.0"
-        }
-      }
-    ]
-  },
-  {
-    "id": "imgui",
-    "name": "Dear ImGui",
-    "description": "A bloat-free immediate mode graphical user interface framework for tools and applications.",
-    "group": "framework",
-    "url": "https://github.com/ocornut/imgui",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "imgui"
-        }
-      }
-    ]
-  },
-  {
-    "id": "juce",
-    "name": "JUCE",
-    "description": "A cross-platform framework for developing audio applications, plugins, and graphical software.",
-    "group": "framework",
-    "url": "https://juce.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "juce"
-        }
-      }
-    ]
-  },
-  {
-    "id": "libadwaita",
-    "name": "Libadwaita",
-    "description": "A GTK-based framework for building modern GNOME applications following the GNOME Human Interface Guidelines.",
-    "group": "framework",
-    "url": "https://gnome.pages.gitlab.gnome.org/libadwaita",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "libadwaita"
-        }
-      }
-    ]
-  },
-  {
-    "id": "libuv",
-    "name": "libuv",
-    "description": "A multi-platform asynchronous I/O framework used for high-performance networking applications.",
-    "group": "framework",
-    "url": "https://libuv.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "libuv"
-        }
-      }
-    ]
-  },
-  {
-    "id": "tbb",
-    "name": "oneTBB",
-    "description": "A parallel programming framework for scalable multithreaded C++ applications.",
-    "group": "framework",
-    "url": "https://github.com/oneapi-src/oneTBB",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "onetbb"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gtest",
-    "name": "GoogleTest",
-    "description": "A C++ testing framework for writing and running unit tests.",
-    "group": "framework",
-    "url": "https://github.com/google/googletest",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gtest"
-        }
-      }
-    ]
-  },
-  {
-    "id": "git",
-    "name": "Git",
-    "description": "A distributed version control system for tracking changes and collaborating on software projects.",
-    "group": "tooling",
-    "url": "https://git-scm.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "git"
-        }
-      }
-    ]
-  },
-  {
-    "id": "github-cli",
-    "name": "GitHub CLI",
-    "description": "A command-line tool for interacting with GitHub repositories, pull requests, issues, and workflows.",
-    "group": "tooling",
-    "url": "https://cli.github.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "github-cli"
-        }
-      }
-    ]
-  },
-  {
-    "id": "git-lfs",
-    "name": "Git LFS",
-    "description": "An extension for Git that manages large files efficiently.",
-    "group": "tooling",
-    "url": "https://git-lfs.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "git-lfs"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cmake",
-    "name": "CMake",
-    "description": "A cross-platform build system generator for C and C++ projects.",
-    "group": "tooling",
-    "url": "https://cmake.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "cmake"
-        }
-      }
-    ]
-  },
-  {
-    "id": "meson",
-    "name": "Meson",
-    "description": "A fast and user-friendly build system focused on developer productivity.",
-    "group": "tooling",
-    "url": "https://mesonbuild.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "meson"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ninja",
-    "name": "Ninja",
-    "description": "A small and efficient build system designed for speed.",
-    "group": "tooling",
-    "url": "https://ninja-build.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ninja"
-        }
-      }
-    ]
-  },
-  {
-    "id": "make",
-    "name": "GNU Make",
-    "description": "A build automation tool for compiling and managing software projects.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/make",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "make"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gdb",
-    "name": "GDB",
-    "description": "The GNU debugger for analyzing and debugging applications.",
-    "group": "tooling",
-    "url": "https://www.sourceware.org/gdb",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gdb"
-        }
-      }
-    ]
-  },
-  {
-    "id": "lldb",
-    "name": "LLDB",
-    "description": "A high-performance debugger built as part of the LLVM project.",
-    "group": "tooling",
-    "url": "https://lldb.llvm.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "lldb"
-        }
-      }
-    ]
-  },
-  {
-    "id": "valgrind",
-    "name": "Valgrind",
-    "description": "A programming tool for memory debugging, leak detection, and profiling.",
-    "group": "tooling",
-    "url": "https://valgrind.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "valgrind"
-        }
-      }
-    ]
-  },
-  {
-    "id": "strace",
-    "name": "strace",
-    "description": "A diagnostic utility for monitoring system calls and signals.",
-    "group": "tooling",
-    "url": "https://strace.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "strace"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ltrace",
-    "name": "ltrace",
-    "description": "A debugging utility for tracing library calls made by applications.",
-    "group": "tooling",
-    "url": "https://www.ltrace.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ltrace"
-        }
-      }
-    ]
-  },
-  {
-    "id": "docker",
-    "name": "Docker",
-    "description": "A platform for developing, shipping, and running applications in containers.",
-    "group": "tooling",
-    "url": "https://www.docker.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "docker"
-        }
-      }
-    ]
-  },
-  {
-    "id": "docker-compose",
-    "name": "Docker Compose",
-    "description": "A tool for defining and managing multi-container Docker applications.",
-    "group": "tooling",
-    "url": "https://docs.docker.com/compose",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "docker-compose"
-        }
-      }
-    ]
-  },
-  {
-    "id": "podman",
-    "name": "Podman",
-    "description": "A daemonless container engine compatible with OCI containers.",
-    "group": "tooling",
-    "url": "https://podman.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "podman"
-        }
-      }
-    ]
-  },
-  {
-    "id": "jq",
-    "name": "jq",
-    "description": "A lightweight command-line processor for working with JSON data.",
-    "group": "tooling",
-    "url": "https://jqlang.github.io/jq",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "jq"
-        }
-      }
-    ]
-  },
-  {
-    "id": "yq",
-    "name": "yq",
-    "description": "A portable command-line processor for YAML, XML, and TOML documents.",
-    "group": "tooling",
-    "url": "https://github.com/mikefarah/yq",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "yq"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ripgrep",
-    "name": "ripgrep",
-    "description": "A fast recursive search tool optimized for source code.",
-    "group": "tooling",
-    "url": "https://github.com/BurntSushi/ripgrep",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ripgrep"
-        }
-      }
-    ]
-  },
-  {
-    "id": "fd",
-    "name": "fd",
-    "description": "A simple, fast, and user-friendly alternative to the find command.",
-    "group": "tooling",
-    "url": "https://github.com/sharkdp/fd",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "fd"
-        }
-      }
-    ]
-  },
-  {
-    "id": "fzf",
-    "name": "fzf",
-    "description": "A general-purpose fuzzy finder for the command line.",
-    "group": "tooling",
-    "url": "https://github.com/junegunn/fzf",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "fzf"
-        }
-      }
-    ]
-  },
-  {
-    "id": "tmux",
-    "name": "tmux",
-    "description": "A terminal multiplexer for managing multiple shell sessions.",
-    "group": "tooling",
-    "url": "https://github.com/tmux/tmux",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "tmux"
-        }
-      }
-    ]
-  },
-  {
-    "id": "tree",
-    "name": "tree",
-    "description": "A command-line utility for displaying directory structures as a tree.",
-    "group": "tooling",
-    "url": "https://oldmanprogrammer.net/source.php?dir=projects/tree",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "tree"
-        }
-      }
-    ]
-  },
-  {
-    "id": "curl",
-    "name": "cURL",
-    "description": "A command-line tool for transferring data using various network protocols.",
-    "group": "tooling",
-    "url": "https://curl.se",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "curl"
-        }
-      }
-    ]
-  },
-  {
-    "id": "wget",
-    "name": "Wget",
-    "description": "A network utility for retrieving files from web servers.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/wget",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "wget"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gcc",
-    "name": "GCC",
-    "description": "The GNU Compiler Collection providing compilers for C, C++, and other programming languages.",
-    "group": "tooling",
-    "url": "https://gcc.gnu.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gcc"
-        }
-      }
-    ]
-  },
-  {
-    "id": "clang",
-    "name": "Clang",
-    "description": "A compiler frontend for C, C++, and Objective-C built on the LLVM infrastructure.",
-    "group": "tooling",
-    "url": "https://clang.llvm.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "clang"
-        }
-      }
-    ]
-  },
-  {
-    "id": "perf",
-    "name": "Linux perf",
-    "description": "A Linux performance analysis tool for profiling applications, CPUs, and system activity.",
-    "group": "tooling",
-    "url": "https://perf.wiki.kernel.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "perf"
-        }
-      }
-    ]
-  },
-  {
-    "id": "bpftrace",
-    "name": "bpftrace",
-    "description": "A high-level tracing language for Linux based on eBPF for system and application diagnostics.",
-    "group": "tooling",
-    "url": "https://bpftrace.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "bpftrace"
-        }
-      }
-    ]
-  },
-  {
-    "id": "strace-log-merge",
-    "name": "strace-log-merge",
-    "description": "A utility for combining and processing traces generated by strace.",
-    "group": "tooling",
-    "url": "https://strace.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "strace"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gprof",
-    "name": "GNU gprof",
-    "description": "A profiling tool for analyzing program execution and identifying performance bottlenecks.",
-    "group": "tooling",
-    "url": "https://sourceware.org/binutils/docs/gprof",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "binutils"
-        }
-      }
-    ]
-  },
-  {
-    "id": "binutils",
-    "name": "GNU Binutils",
-    "description": "A collection of binary utilities for assembling, linking, inspecting, and manipulating executable files.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/binutils",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "binutils"
-        }
-      }
-    ]
-  },
-  {
-    "id": "readelf",
-    "name": "readelf",
-    "description": "A command-line utility for inspecting ELF binaries, sections, symbols, and program headers.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/binutils",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "binutils"
-        }
-      }
-    ]
-  },
-  {
-    "id": "objdump",
-    "name": "objdump",
-    "description": "A binary inspection utility for displaying information from object and executable files.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/binutils",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "binutils"
-        }
-      }
-    ]
-  },
-  {
-    "id": "shellcheck",
-    "name": "ShellCheck",
-    "description": "A static analysis tool that detects common errors and problematic patterns in shell scripts.",
-    "group": "tooling",
-    "url": "https://www.shellcheck.net",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "shellcheck"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cbindgen",
-    "name": "cbindgen",
-    "description": "A tool for generating C and C++ headers from Rust source code.",
-    "group": "tooling",
-    "url": "https://github.com/eqrion/cbindgen",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "cbindgen"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cargo-edit",
-    "name": "cargo-edit",
-    "description": "Cargo subcommands for conveniently managing Rust project dependencies from the command line.",
-    "group": "tooling",
-    "url": "https://github.com/killercup/cargo-edit",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "cargo-edit"
-        }
-      }
-    ]
-  },
-  {
-    "id": "rust-analyzer",
-    "name": "rust-analyzer",
-    "description": "A language server providing advanced code intelligence and development features for Rust.",
-    "group": "tooling",
-    "url": "https://rust-analyzer.github.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "rust-analyzer"
-        }
-      }
-    ]
-  },
-  {
-    "id": "python-pip",
-    "name": "Python pip",
-    "description": "The standard package installer for Python packages and Python development environments.",
-    "group": "tooling",
-    "url": "https://pip.pypa.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "python-pip"
-        }
-      }
-    ]
-  },
-  {
-    "id": "python-pytest",
-    "name": "pytest",
-    "description": "A powerful Python testing framework for writing simple and scalable automated tests.",
-    "group": "tooling",
-    "url": "https://docs.pytest.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "python-pytest"
-        }
-      }
-    ]
-  },
-  {
-    "id": "python-black",
-    "name": "Black",
-    "description": "An opinionated Python code formatter designed for consistent and automated source formatting.",
-    "group": "tooling",
-    "url": "https://black.readthedocs.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "python-black"
-        }
-      }
-    ]
-  },
-  {
-    "id": "python-mypy",
-    "name": "mypy",
-    "description": "A static type checker for Python that verifies type annotations during development.",
-    "group": "tooling",
-    "url": "https://mypy-lang.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "python-mypy"
-        }
-      }
-    ]
-  },
-  {
-    "id": "python-ruff",
-    "name": "Ruff",
-    "description": "An extremely fast Python linter and code formatter written in Rust.",
-    "group": "tooling",
-    "url": "https://docs.astral.sh/ruff",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ruff"
-        }
-      }
-    ]
-  },
-  {
-    "id": "shell-format",
-    "name": "Shell Formatter",
-    "description": "A collection of formatting utilities for maintaining consistent shell scripts.",
-    "group": "tooling",
-    "url": "https://github.com/mvdan/sh",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "shfmt"
-        }
-      }
-    ]
-  },
-  {
-    "id": "openssl",
-    "name": "OpenSSL",
-    "description": "A toolkit for cryptography, TLS, certificates, and secure network communication.",
-    "group": "tooling",
-    "url": "https://www.openssl.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "openssl"
-        }
-      }
-    ]
-  },
-  {
-    "id": "nmap",
-    "name": "Nmap",
-    "description": "A network discovery and security auditing tool for scanning hosts, services, and network configurations.",
-    "group": "tooling",
-    "url": "https://nmap.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "nmap"
-        }
-      }
-    ]
-  },
-  {
-    "id": "netcat",
-    "name": "Netcat",
-    "description": "A command-line networking utility for creating TCP and UDP connections and testing network services.",
-    "group": "tooling",
-    "url": "https://man.openbsd.org/nc.1",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "openbsd-netcat"
-        }
-      }
-    ]
-  },
-  {
-    "id": "socat",
-    "name": "socat",
-    "description": "A versatile command-line utility for transferring data between files, sockets, terminals, and network connections.",
-    "group": "tooling",
-    "url": "http://www.dest-unreach.org/socat",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "socat"
-        }
-      }
-    ]
-  },
-  {
-    "id": "dnsutils",
-    "name": "DNS Utilities",
-    "description": "A collection of command-line utilities for querying and diagnosing DNS infrastructure.",
-    "group": "tooling",
-    "url": "https://www.isc.org/bind",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "bind"
-        }
-      }
-    ]
-  },
-  {
-    "id": "whois",
-    "name": "WHOIS",
-    "description": "A command-line utility for querying domain registration and ownership information.",
-    "group": "tooling",
-    "url": "https://github.com/rfc1036/whois",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "whois"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ssh",
-    "name": "OpenSSH",
-    "description": "A secure networking suite providing SSH remote access, file transfer, and tunneling capabilities.",
-    "group": "tooling",
-    "url": "https://www.openssh.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "openssh"
-        }
-      }
-    ]
-  },
-  {
-    "id": "rsync",
-    "name": "rsync",
-    "description": "A fast file synchronization and transfer utility optimized for local and remote systems.",
-    "group": "tooling",
-    "url": "https://rsync.samba.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "rsync"
-        }
-      }
-    ]
-  },
-  {
-    "id": "sccache",
-    "name": "sccache",
-    "description": "A compiler caching tool that accelerates repeated builds of Rust, C, and C++ projects.",
-    "group": "tooling",
-    "url": "https://github.com/mozilla/sccache",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "sccache"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ccache",
-    "name": "ccache",
-    "description": "A compiler cache that speeds up repeated C and C++ compilations.",
-    "group": "tooling",
-    "url": "https://ccache.dev",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ccache"
-        }
-      }
-    ]
-  },
-  {
-    "id": "pkg-config",
-    "name": "pkg-config",
-    "description": "A utility for retrieving compiler and linker flags for installed libraries.",
-    "group": "tooling",
-    "url": "https://gitlab.freedesktop.org/pkg-config/pkg-config",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "pkgconf"
-        }
-      }
-    ]
-  },
-  {
-    "id": "autoconf",
-    "name": "GNU Autoconf",
-    "description": "A build configuration system for generating portable shell scripts that configure software builds.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/autoconf",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "autoconf"
-        }
-      }
-    ]
-  },
-  {
-    "id": "automake",
-    "name": "GNU Automake",
-    "description": "A build automation tool for generating portable Makefiles for software projects.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/automake",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "automake"
-        }
-      }
-    ]
-  },
-  {
-    "id": "autoconf-archive",
-    "name": "Autoconf Archive",
-    "description": "A collection of reusable Autoconf macros for configuring portable software projects.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/autoconf-archive",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "autoconf-archive"
-        }
-      }
-    ]
-  },
-  {
-    "id": "coccinelle",
-    "name": "Coccinelle",
-    "description": "A program transformation and analysis tool for C source code and large-scale refactoring.",
-    "group": "tooling",
-    "url": "https://coccinelle.gitlabpages.inria.fr/website",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "coccinelle"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ctags",
-    "name": "Universal Ctags",
-    "description": "A source code indexing tool that generates tags for navigating large software projects.",
-    "group": "tooling",
-    "url": "https://ctags.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "universal-ctags"
-        }
-      }
-    ]
-  },
-  {
-    "id": "global",
-    "name": "GNU Global",
-    "description": "A source code tagging system for searching and navigating large codebases.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/global",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "global"
-        }
-      }
-    ]
-  },
-  {
-    "id": "doxygen",
-    "name": "Doxygen",
-    "description": "A documentation generator that extracts structured documentation from source code.",
-    "group": "tooling",
-    "url": "https://www.doxygen.nl",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "doxygen"
-        }
-      }
-    ]
-  },
-  {
-    "id": "graphviz",
-    "name": "Graphviz",
-    "description": "A graph visualization toolkit for generating diagrams and visual representations from structured data.",
-    "group": "tooling",
-    "url": "https://graphviz.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "graphviz"
-        }
-      }
-    ]
-  },
-  {
-    "id": "pandoc",
-    "name": "Pandoc",
-    "description": "A universal document converter for transforming documents between markup and publishing formats.",
-    "group": "tooling",
-    "url": "https://pandoc.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "pandoc-cli"
-        }
-      }
-    ]
-  },
-  {
-    "id": "protobuf-compiler",
-    "name": "Protocol Buffers Compiler",
-    "description": "A compiler for generating source code from Protocol Buffers interface definitions.",
-    "group": "tooling",
-    "url": "https://protobuf.dev",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "protobuf"
-        }
-      }
-    ]
-  },
-  {
-    "id": "grpc-tools",
-    "name": "gRPC Tools",
-    "description": "Command-line development tools for generating and working with gRPC service implementations.",
-    "group": "tooling",
-    "url": "https://grpc.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "grpc"
-        }
-      }
-    ]
-  },
-  {
-    "id": "minicom",
-    "name": "Minicom",
-    "description": "A terminal-based serial communication tool commonly used for embedded systems development.",
-    "group": "tooling",
-    "url": "https://salsa.debian.org/minicom-team/minicom",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "minicom"
-        }
-      }
-    ]
-  },
-  {
-    "id": "screen",
-    "name": "GNU Screen",
-    "description": "A terminal multiplexer for managing persistent command-line sessions and remote terminals.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/screen",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "screen"
-        }
-      }
-    ]
-  },
-  {
-    "id": "time",
-    "name": "GNU time",
-    "description": "A command-line utility for measuring program execution time and resource consumption.",
-    "group": "tooling",
-    "url": "https://www.gnu.org/software/time",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "time"
-        }
-      }
-    ]
-  },
-  {
-    "id": "watch",
-    "name": "procps-ng",
-    "description": "A collection of essential Linux process and system monitoring utilities.",
-    "group": "tooling",
-    "url": "https://gitlab.com/procps-ng/procps",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "procps-ng"
-        }
-      }
-    ]
-  },
-  {
-    "id": "lsof",
-    "name": "lsof",
-    "description": "A diagnostic utility for listing files, sockets, and other resources opened by processes.",
-    "group": "tooling",
-    "url": "https://github.com/lsof-org/lsof",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "lsof"
-        }
-      }
-    ]
-  },
-  {
-    "id": "htop",
-    "name": "htop",
-    "description": "An interactive process viewer for monitoring CPU, memory, and system activity.",
-    "group": "tooling",
-    "url": "https://htop.dev",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "htop"
-        }
-      }
-    ]
-  },
-  {
-    "id": "iotop",
-    "name": "iotop",
-    "description": "An interactive utility for monitoring disk I/O activity generated by processes.",
-    "group": "tooling",
-    "url": "http://guichaz.free.fr/iotop",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "iotop"
-        }
-      }
-    ]
-  },
-  {
-    "id": "iftop",
-    "name": "iftop",
-    "description": "A command-line network monitoring tool for observing bandwidth usage by connections.",
-    "group": "tooling",
-    "url": "http://www.ex-parrot.com/pdw/iftop",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "iftop"
-        }
-      }
-    ]
-  },
-  {
-    "id": "nload",
-    "name": "nload",
-    "description": "A terminal-based network traffic monitor displaying incoming and outgoing bandwidth usage.",
-    "group": "tooling",
-    "url": "https://github.com/rolandriegel/nload",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "nload"
-        }
-      }
-    ]
-  },
-  {
-    "id": "tcpdump",
-    "name": "tcpdump",
-    "description": "A command-line packet analyzer for capturing and inspecting network traffic.",
-    "group": "tooling",
-    "url": "https://www.tcpdump.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "tcpdump"
-        }
-      }
-    ]
-  },
-  {
-    "id": "wireshark-cli",
-    "name": "TShark",
-    "description": "A command-line network protocol analyzer for capturing and inspecting network packets.",
-    "group": "tooling",
-    "url": "https://www.wireshark.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "wireshark-cli"
-        }
-      }
-    ]
-  },
-  {
-    "id": "grpcurl",
-    "name": "grpcurl",
-    "description": "A command-line utility for interacting with gRPC servers using a curl-like interface.",
-    "group": "tooling",
-    "url": "https://github.com/fullstorydev/grpcurl",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "grpcurl"
-        }
-      }
-    ]
-  },
-  {
-    "id": "git-delta",
-    "name": "Delta",
-    "description": "A syntax-highlighting pager for Git diffs and other command-line output.",
-    "group": "tooling",
-    "url": "https://github.com/dandavison/delta",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "git-delta"
-        }
-      }
-    ]
-  },
-  {
-    "id": "lazygit",
-    "name": "lazygit",
-    "description": "A terminal user interface for managing Git repositories efficiently.",
-    "group": "tooling",
-    "url": "https://github.com/jesseduffield/lazygit",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "lazygit"
-        }
-      }
-    ]
-  },
-  {
-    "id": "lazydocker",
-    "name": "lazydocker",
-    "description": "A terminal user interface for managing Docker containers and images.",
-    "group": "tooling",
-    "url": "https://github.com/jesseduffield/lazydocker",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "lazydocker"
-        }
-      }
-    ]
-  },
-  {
-    "id": "chezmoi",
-    "name": "chezmoi",
-    "description": "A tool for managing personal configuration files across multiple machines.",
-    "group": "tooling",
-    "url": "https://www.chezmoi.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "chezmoi"
-        }
-      }
-    ]
-  },
-  {
-    "id": "starship",
-    "name": "Starship",
-    "description": "A fast and customizable cross-shell prompt for modern development environments.",
-    "group": "tooling",
-    "url": "https://starship.rs",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "starship"
-        }
-      }
-    ]
-  },
-  {
-    "id": "zoxide",
-    "name": "zoxide",
-    "description": "A smarter directory navigation tool that learns frequently used locations.",
-    "group": "tooling",
-    "url": "https://github.com/ajeetdsouza/zoxide",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "zoxide"
-        }
-      }
-    ]
-  },
-  {
-    "id": "tldr",
-    "name": "tldr",
-    "description": "A simplified command-line documentation tool providing practical examples for common commands.",
-    "group": "tooling",
-    "url": "https://tldr.sh",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "tldr"
-        }
-      }
-    ]
-  },
-  {
-    "id": "shellharden",
-    "name": "Shellharden",
-    "description": "A static analysis and transformation tool for improving the safety of shell scripts.",
-    "group": "tooling",
-    "url": "https://github.com/anbd/shellharden",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "shellharden"
-        }
-      }
-    ]
-  },
-  {
-    "id": "nodejs",
-    "name": "Node.js",
-    "description": "JavaScript runtime built on Chrome's V8 engine.",
-    "group": "tooling",
-    "url": "https://nodejs.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "nodejs"
-        }
-      }
-    ]
-  },
-  {
-    "id": "npm",
-    "name": "NPM",
-    "description": "Package manager for Node.js.",
-    "group": "tooling",
-    "url": "https://www.npmjs.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "npm"
-        }
-      }
-    ]
-  },
-  {
-    "id": "bun",
-    "name": "Bun",
-    "description": "Fast all-in-one JavaScript runtime.",
-    "group": "tooling",
-    "url": "https://bun.sh",
+    "url": "https://neovim.io/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "curl -fsSL https://bun.sh/install | bash"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm neovim"
         }
       }
     ]
   },
   {
-    "id": "deno",
-    "name": "Deno",
-    "description": "A modern secure runtime for JavaScript and TypeScript.",
-    "group": "tooling",
-    "url": "https://deno.com",
+    "id": "geany",
+    "name": "Geany",
+    "description": "Geany is a powerful, stable and lightweight programmer's text editor that provides tons of useful features without bogging down your workflow. It runs on Linux, Windows and macOS, is translated into over 40 languages, and has built-in support for more than 50 programming languages.",
+    "icon": "",
+    "group": "code_editor",
+    "url": "https://www.geany.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm geany"
+        }
+      }
+    ]
+  },
+  {
+    "id": "codeblocks",
+    "name": "Code::Blocks",
+    "description": "Code::Blocks is a free  C/C++ and Fortran IDE built to meet the most demanding needs of its users. It is designed to be very extensible and fully configurable",
+    "icon": "",
+    "group": "code_editor",
+    "url": "https://www.geany.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm codeblocks"
+        }
+      }
+    ]
+  },
+  {
+    "id": "vim",
+    "name": "Vim",
+    "description": "Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient. It is included as \"vi\" with most UNIX systems and with Apple OS X.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg",
+    "group": "code_editor",
+    "url": "https://www.vim.org",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm vim"
+        }
+      }
+    ]
+  },
+
+
+  {
+    "id": "python",
+    "name": "Python",
+    "description": "Python is a programming language that lets you work quickly\nand integrate systems more effectively",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+    "group": "programming_language",
+    "url": "https://www.python.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm python"
+        }
+      }
+    ]
+  },
+  {
+    "id": "javascript_nodejs",
+    "name": "Javascript (NodeJS runtime)",
+    "description": "Node.js is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+    "group": "programming_language",
+    "url": "https://nodejs.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm nodejs npm"
+        }
+      }
+    ]
+  },
+  {
+    "id": "javascript_denojs",
+    "name": "Javascript (Deno runtime)",
+    "description": "Better, faster JavaScript",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/denojs/denojs-original.svg",
+    "group": "programming_language",
+    "url": "https://deno.com/",
     "install_steps": [
       {
         "type": "run_custom_script",
@@ -2764,37 +180,600 @@
     ]
   },
   {
-    "id": "nvm",
-    "name": "Node Version Manager",
-    "description": "Simple bash script to manage multiple active node.js versions.",
-    "group": "tooling",
-    "url": "https://github.com/nvm-sh/nvm",
+    "id": "javascript_bun",
+    "name": "Javascript (Bun runtime)",
+    "description": "Bun is a fast JavaScript runtime & toolkit. All in one",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bun/bun-original.svg",
+    "group": "programming_language",
+    "url": "https://bun.com/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash"
+          "script": "curl -fsSL https://bun.sh/install | bash"
         }
       }
     ]
   },
   {
-    "id": "flutter",
-    "name": "Flutter SDK",
-    "description": "Google's UI toolkit for building natively compiled applications.",
-    "group": "tooling",
-    "url": "https://flutter.dev",
+    "id": "typescript",
+    "name": "Typescript",
+    "description": "TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    "group": "programming_language",
+    "url": "https://www.typescriptlang.org/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME/.flutter"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A npm install -g typescript"
+        }
+      }
+    ]
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "description": "The Go programming language",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
+    "group": "programming_language",
+    "url": "https://go.dev/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm go"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "description": "A language empowering everyone\nto build reliable and efficient software.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg",
+    "group": "programming_language",
+    "url": "https://rust-lang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm rust"
         }
       },
       {
         "type": "run_in_terminal",
         "data": {
-          "script": "echo 'export PATH=\"$PATH:$HOME/.flutter/bin\"' >> ~/.bashrc"
+          "script": "rustup"
+        }
+      }
+    ]
+  },
+  {
+    "id": "java_openjdk",
+    "name": "Java (OpenJDK)",
+    "description": "",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+    "group": "programming_language",
+    "url": "https://openjdk.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm jdk-openjdk"
+        }
+      }
+    ]
+  },
+  {
+    "id": "c_and_cpp_gcc",
+    "name": "C/C++ (GCC)",
+    "description": "GCC, the GNU Compiler ",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
+    "group": "programming_language",
+    "url": "https://gcc.gnu.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm gcc"
+        }
+      }
+    ]
+  },
+  {
+    "id": "c_and_cpp_clang",
+    "name": "C/C++ (Clang)",
+    "description": "A C language family frontend for LLVM",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
+    "group": "programming_language",
+    "url": "https://clang.llvm.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm clang llvm"
+        }
+      }
+    ]
+  },
+  {
+    "id": "c_sharp",
+    "name": "C# (.NET SDK)",
+    "description": ".NET is a free and open-source application platform supported by Microsoft.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg",
+    "group": "programming_language",
+    "url": "https://dotnet.microsoft.com/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm dotnet-sdk"
+        }
+      }
+    ]
+  },
+  {
+    "id": "php",
+    "name": "PHP",
+    "description": "",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg",
+    "group": "programming_language",
+    "url": "https://www.php.net/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm php"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "description": "The Ruby Programming Language",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ruby/ruby-original.svg",
+    "group": "programming_language",
+    "url": "https://www.ruby-lang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm ruby"
+        }
+      }
+    ]
+  },
+  {
+    "id": "lua",
+    "name": "Lua",
+    "description": "Lua is a powerful, efficient, lightweight, embeddable scripting language. It supports several programming styles: procedural, object-oriented, functional, data-driven, and data description.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/lua/lua-original.svg",
+    "group": "programming_language",
+    "url": "https://www.lua.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm lua"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perl",
+    "name": "Perl",
+    "description": "Perl is a highly capable, feature-rich programming language with over 38 years of development.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/perl/perl-original.svg",
+    "group": "programming_language",
+    "url": "https://www.perl.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm perl"
+        }
+      }
+    ]
+  },
+  {
+    "id": "r",
+    "name": "R",
+    "description": "R is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/r/r-original.svg",
+    "group": "programming_language",
+    "url": "https://www.perl.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm perl"
+        }
+      }
+    ]
+  },
+  {
+    "id": "elm",
+    "name": "Elm",
+    "description": "A delightful language\nfor reliable web applications.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elm/elm-original.svg",
+    "group": "programming_language",
+    "url": "https://elm-lang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A npm install -g elm"
+        }
+      }
+    ]
+  },
+  {
+    "id": "kotlin",
+    "name": "Kotlin",
+    "description": "Kotlin is a modern, cross-platform, statically typed programming language.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg",
+    "group": "programming_language",
+    "url": "https://kotlinlang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm kotlin"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dart",
+    "name": "Dart",
+    "description": "An approachable, portable, and productive language\nfor high-quality apps on any platform",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg",
+    "group": "programming_language",
+    "url": "https://dart.dev/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm dart"
+        }
+      }
+    ]
+  },
+  {
+    "id": "zig",
+    "name": "Zig",
+    "description": "Zig is a general-purpose programming language and toolchain for maintaining robust, optimal and reusable software.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/zig/zig-original.svg",
+    "group": "programming_language",
+    "url": "https://ziglang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm zig"
+        }
+      }
+    ]
+  },
+  {
+    "id": "nim",
+    "name": "Nim",
+    "description": "Nim is a statically typed compiled systems programming language. It combines successful concepts from mature languages like Python, Ada and Modula.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nim/nim-original.svg",
+    "group": "programming_language",
+    "url": "https://nim-lang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm nim"
+        }
+      }
+    ]
+  },
+  {
+    "id": "julia",
+    "name": "Julia",
+    "description": "The Julia Programming Language",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/julia/julia-original.svg",
+    "group": "programming_language",
+    "url": "https://julialang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm julia"
+        }
+      }
+    ]
+  },
+  {
+    "id": "scala",
+    "name": "Scala",
+    "description": "A programming language that scales with you: from small scripts to large multiplatform applications.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scala/scala-original.svg",
+    "group": "programming_language",
+    "url": "https://www.scala-lang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm scala"
+        }
+      }
+    ]
+  },
+  {
+    "id": "clojure",
+    "name": "Clojure",
+    "description": "Clojure is a robust, practical, and fast programming language with a set of useful features that together form a simple, coherent, and powerful tool.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/clojure/clojure-original.svg",
+    "group": "programming_language",
+    "url": "https://clojure.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm clojure"
+        }
+      }
+    ]
+  },
+  {
+    "id": "haskell",
+    "name": "Haskell",
+    "description": "",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/haskell/haskell-original.svg",
+    "group": "programming_language",
+    "url": "https://www.haskell.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm ghc cabal-install"
+        }
+      }
+    ]
+  },
+  {
+    "id": "erlang",
+    "name": "Erlang",
+    "description": "Practical functional programming\nfor a parallel world\n",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/erlang/erlang-original.svg",
+    "group": "programming_language",
+    "url": "https://www.erlang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm erlang"
+        }
+      }
+    ]
+  },
+  {
+    "id": "elixir",
+    "name": "Elixir",
+    "description": "Simple from zero to scale",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elixir/elixir-original.svg",
+    "group": "programming_language",
+    "url": "https://elixir-lang.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm elixir"
+        }
+      }
+    ]
+  },
+  {
+    "id": "asm_nasm",
+    "name": "Assembly (NASM)",
+    "description": "An assembler for the x86 CPU architecture portable to nearly every modern platform, and with code generation for many platforms old and new.",
+    "icon": "",
+    "group": "programming_language",
+    "url": "https://www.nasm.us/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm nasm"
+        }
+      }
+    ]
+  },
+  {
+    "id": "fortran_gcc",
+    "name": "Fortran (GCC)",
+    "description": "Fortran\nHigh-performance parallel programming language",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fortran/fortran-original.svg",
+    "group": "programming_language",
+    "url": "https://gcc.gnu.org/fortran/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm gcc-fortran"
+        }
+      }
+    ]
+  },
+  {
+    "id": "fpc",
+    "name": "Free Pascal",
+    "description": "Free Pascal is a mature, versatile, open source Pascal compiler",
+    "icon": "",
+    "group": "programming_language",
+    "url": "https://www.freepascal.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm fpc"
+        }
+      }
+    ]
+  },
+
+  {
+    "id": "git",
+    "name": "Git",
+    "description": "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.\n\n",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+    "group": "tooling",
+    "url": "https://git-scm.com/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm git"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gh",
+    "name": "GitHub CLI ",
+    "description": "GitHub CLI brings GitHub to your terminal. Free and open source.",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+    "group": "tooling",
+    "url": "http://cli.github.com/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm gh"
+        }
+      }
+    ]
+  },
+  {
+    "id": "glab",
+    "name": "GitLab CLI",
+    "description": "GLab is an open source GitLab CLI tool. It brings GitLab to your terminal, next to where you are already working with git and your code, without switching between windows and browser tabs.",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg",
+    "group": "tooling",
+    "url": "https://docs.gitlab.com/cli/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm glab"
+        }
+      }
+    ]
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "description": "Manage and monitor your containers with Docker CLI tools\n",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+    "group": "tooling",
+    "url": "https://www.docker.com/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm docker"
+        }
+      }
+    ]
+  },
+  {
+    "id": "docker-compose",
+    "name": "Docker Compose",
+    "description": "Docker Compose is a tool for defining and running multi-container applications. It is the key to unlocking a streamlined and efficient development and deployment experience.",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+    "group": "tooling",
+    "url": "https://docs.docker.com/compose/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm docker-compose "
+        }
+      }
+    ]
+  },
+  {
+    "id": "podman",
+    "name": "Podman",
+    "description": "The best free & open source container tools",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/podman/podman-original.svg",
+    "group": "tooling",
+    "url": "https://podman.io/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm podman"
+        }
+      }
+    ]
+  },
+  {
+    "id": "k8s",
+    "name": "Kubernetes",
+    "description": "Kubernetes, also known as K8s, is an open source system for automating deployment, scaling, and management of containerized applications.",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg",
+    "group": "tooling",
+    "url": "https://kubernetes.io/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm kubectl"
+        }
+      }
+    ]
+  },
+  {
+    "id": "make",
+    "name": "Make (GNU)",
+    "description": "GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.",
+    "icon": "",
+    "group": "tooling",
+    "url": "https://www.gnu.org/software/make/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm make"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmake",
+    "name": "CMake",
+    "description": "A Powerful Software Build System",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cmake/cmake-original.svg",
+    "group": "tooling",
+    "url": "https://cmake.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm cmake"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ninja",
+    "name": "Ninja",
+    "description": "Ninja is a small build system with a focus on speed. It differs from other build systems in two major respects: it is designed to have its input files generated by a higher-level build system, and it is designed to run builds as fast as possible.",
+    "icon":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ninja/ninja-original.svg",
+    "group": "tooling",
+    "url": "https://ninja-build.org/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" &&  sudo -A pacman -S --noconfirm ninja"
         }
       }
     ]
@@ -2802,905 +781,319 @@
   {
     "id": "gradle",
     "name": "Gradle",
-    "description": "A powerful build system for JVM languages like Java and Kotlin.",
+    "description": "An open-source build automation tool focused on flexibility and performance, widely used in the Java and Android ecosystem.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg",
     "group": "tooling",
-    "url": "https://gradle.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gradle"
-        }
-      }
-    ]
-  },
-  {
-    "id": "uv",
-    "name": "uv",
-    "description": "An extremely fast Python package installer and resolver, written in Rust.",
-    "group": "tooling",
-    "url": "https://docs.astral.sh/uv",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "uv"
-        }
-      }
-    ]
-  },
-  {
-    "id": "poetry",
-    "name": "Poetry",
-    "description": "Python packaging and dependency management made easy.",
-    "group": "tooling",
-    "url": "https://python-poetry.org",
+    "url": "https://gradle.org/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "curl -sSL https://install.python-poetry.org | python3 -"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm gradle"
         }
       }
     ]
   },
   {
-    "id": "pipx",
-    "name": "pipx",
-    "description": "Execute binaries from Python packages in isolated environments.",
+    "id": "maven",
+    "name": "Apache Maven",
+    "description": "A software project management and comprehension tool based on the POM concept, primarily used for Java projects.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg",
     "group": "tooling",
-    "url": "https://pipx.pypa.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "python-pipx"
-        }
-      }
-    ]
-  },
-  {
-    "id": "yamllint",
-    "name": "yamllint",
-    "description": "A linter for detecting syntax and style problems in YAML files.",
-    "group": "tooling",
-    "url": "https://github.com/adrienverge/yamllint",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "yamllint"
-        }
-      }
-    ]
-  },
-  {
-    "id": "jsoncpp",
-    "name": "JSON tools",
-    "description": "Command-line and development utilities for processing structured JSON data.",
-    "group": "tooling",
-    "url": "https://github.com/open-source-parsers/jsoncpp",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "jsoncpp"
-        }
-      }
-    ]
-  },
-  {
-    "id": "john",
-    "name": "John the Ripper",
-    "description": "A fast password cracker for detecting weak passwords and performing security audits.",
-    "group": "tooling",
-    "url": "https://www.openwall.com/john",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "john"
-        }
-      }
-    ]
-  },
-  {
-    "id": "hashcat",
-    "name": "Hashcat",
-    "description": "An advanced GPU-based password recovery and hash cracking tool.",
-    "group": "tooling",
-    "url": "https://hashcat.net/hashcat",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "hashcat"
-        }
-      }
-    ]
-  },
-  {
-    "id": "hydra",
-    "name": "THC Hydra",
-    "description": "A fast and flexible network logon cracker supporting many protocols.",
-    "group": "tooling",
-    "url": "https://github.com/vanhauser-thc/thc-hydra",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "hydra"
-        }
-      }
-    ]
-  },
-  {
-    "id": "aircrack-ng",
-    "name": "Aircrack-ng",
-    "description": "A complete suite for assessing WiFi network security including monitoring, attacking, and cracking.",
-    "group": "tooling",
-    "url": "https://www.aircrack-ng.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "aircrack-ng"
-        }
-      }
-    ]
-  },
-  {
-    "id": "nikto",
-    "name": "Nikto",
-    "description": "An open-source web server scanner that tests for dangerous files, outdated software, and misconfigurations.",
-    "group": "tooling",
-    "url": "https://cirt.net/Nikto2",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "nikto"
-        }
-      }
-    ]
-  },
-  {
-    "id": "sqlmap",
-    "name": "sqlmap",
-    "description": "An automatic SQL injection and database takeover tool for penetration testing.",
-    "group": "tooling",
-    "url": "https://sqlmap.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "sqlmap"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gobuster",
-    "name": "Gobuster",
-    "description": "A fast directory, DNS, and virtual host brute-forcing tool written in Go.",
-    "group": "tooling",
-    "url": "https://github.com/OJ/gobuster",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gobuster"
-        }
-      }
-    ]
-  },
-  {
-    "id": "radare2",
-    "name": "Radare2",
-    "description": "A portable reverse engineering framework for disassembly, analysis, and binary patching.",
-    "group": "tooling",
-    "url": "https://rada.re",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "radare2"
-        }
-      }
-    ]
-  },
-  {
-    "id": "binwalk",
-    "name": "Binwalk",
-    "description": "A firmware analysis tool for scanning, extracting, and reverse engineering binary images.",
-    "group": "tooling",
-    "url": "https://github.com/ReFirmLabs/binwalk",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "binwalk"
-        }
-      }
-    ]
-  },
-  {
-    "id": "lynis",
-    "name": "Lynis",
-    "description": "A security auditing and hardening tool for Linux, macOS, and Unix systems.",
-    "group": "tooling",
-    "url": "https://cisofy.com/lynis",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "lynis"
-        }
-      }
-    ]
-  },
-  {
-    "id": "clamav",
-    "name": "ClamAV",
-    "description": "An open-source antivirus engine for detecting malware, viruses, and other malicious threats.",
-    "group": "tooling",
-    "url": "https://www.clamav.net",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "clamav"
-        }
-      }
-    ]
-  },
-  {
-    "id": "firejail",
-    "name": "Firejail",
-    "description": "A SUID sandbox program that restricts the running environment of untrusted applications using Linux namespaces and seccomp-bpf.",
-    "group": "tooling",
-    "url": "https://firejail.wordpress.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "firejail"
-        }
-      }
-    ]
-  },
-  {
-    "id": "rkhunter",
-    "name": "rkhunter",
-    "description": "A rootkit, backdoor, and local exploit scanner for Unix-based systems.",
-    "group": "tooling",
-    "url": "https://rkhunter.sourceforge.net",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "rkhunter"
-        }
-      }
-    ]
-  },
-  {
-    "id": "suricata",
-    "name": "Suricata",
-    "description": "A high-performance network intrusion detection, prevention, and security monitoring engine.",
-    "group": "tooling",
-    "url": "https://suricata.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "suricata"
-        }
-      }
-    ]
-  },
-  {
-    "id": "ettercap",
-    "name": "Ettercap",
-    "description": "A comprehensive suite for man-in-the-middle attacks, network analysis, and protocol dissection on LAN.",
-    "group": "tooling",
-    "url": "https://www.ettercap-project.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "ettercap"
-        }
-      }
-    ]
-  },
-  {
-    "id": "masscan",
-    "name": "Masscan",
-    "description": "An extremely fast TCP port scanner capable of scanning the entire Internet in under 5 minutes.",
-    "group": "tooling",
-    "url": "https://github.com/robertdavidgraham/masscan",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "masscan"
-        }
-      }
-    ]
-  },
-  {
-    "id": "sslscan",
-    "name": "sslscan",
-    "description": "A tool for testing SSL/TLS enabled services to discover supported cipher suites and vulnerabilities.",
-    "group": "tooling",
-    "url": "https://github.com/rbsec/sslscan",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "sslscan"
-        }
-      }
-    ]
-  },
-  {
-    "id": "yara",
-    "name": "YARA",
-    "description": "A pattern-matching tool for identifying and classifying malware samples based on textual or binary patterns.",
-    "group": "tooling",
-    "url": "https://virustotal.github.io/yara",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "yara"
-        }
-      }
-    ]
-  },
-  {
-    "id": "foremost",
-    "name": "Foremost",
-    "description": "A forensic data recovery tool for extracting files from disk images based on file headers and structures.",
-    "group": "tooling",
-    "url": "https://foremost.sourceforge.net",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "foremost"
-        }
-      }
-    ]
-  },
-  {
-    "id": "aide",
-    "name": "AIDE",
-    "description": "An advanced intrusion detection environment that monitors file integrity and detects unauthorized changes.",
-    "group": "tooling",
-    "url": "https://aide.github.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "aide"
-        }
-      }
-    ]
-  },
-  {
-    "id": "fail2ban",
-    "name": "Fail2ban",
-    "description": "An intrusion prevention tool that bans IP addresses conducting brute-force attacks by monitoring log files.",
-    "group": "tooling",
-    "url": "https://github.com/fail2ban/fail2ban",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "fail2ban"
-        }
-      }
-    ]
-  },
-  {
-    "id": "apparmor",
-    "name": "AppArmor",
-    "description": "A mandatory access control framework that confines programs to a limited set of resources using per-program profiles.",
-    "group": "tooling",
-    "url": "https://apparmor.net",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "apparmor"
-        }
-      }
-    ]
-  },
-  {
-    "id": "testssl",
-    "name": "testssl.sh",
-    "description": "A command-line tool for checking TLS/SSL ciphers, protocols, and cryptographic flaws on any port.",
-    "group": "tooling",
-    "url": "https://testssl.sh",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "testssl.sh"
-        }
-      }
-    ]
-  },
-  {
-    "id": "zaproxy",
-    "name": "OWASP ZAP",
-    "description": "An open-source web application security scanner for finding vulnerabilities during development and testing.",
-    "group": "tooling",
-    "url": "https://www.zaproxy.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "zaproxy"
-        }
-      }
-    ]
-  },
-  {
-    "id": "volatility3",
-    "name": "Volatility 3",
-    "description": "An advanced memory forensics framework for extracting artifacts from volatile memory (RAM) dumps.",
-    "group": "tooling",
-    "url": "https://www.volatilityfoundation.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "python-volatility3"
-        }
-      }
-    ]
-  },
-  {
-    "id": "qemu-full",
-    "name": "QEMU",
-    "description": "A generic and open-source machine emulator and virtualizer supporting full system and user-mode emulation.",
-    "group": "tooling",
-    "url": "https://www.qemu.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "qemu-full"
-        }
-      }
-    ]
-  },
-  {
-    "id": "libvirt",
-    "name": "libvirt",
-    "description": "A toolkit and API for managing virtualization platforms including KVM, QEMU, Xen, and LXC.",
-    "group": "tooling",
-    "url": "https://libvirt.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "libvirt"
-        }
-      }
-    ]
-  },
-  {
-    "id": "virt-manager",
-    "name": "Virtual Machine Manager",
-    "description": "A graphical desktop application for managing virtual machines through libvirt.",
-    "group": "tooling",
-    "url": "https://virt-manager.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "virt-manager"
-        }
-      }
-    ]
-  },
-  {
-    "id": "virt-viewer",
-    "name": "Virt Viewer",
-    "description": "A lightweight graphical console client for connecting to and viewing virtual machines.",
-    "group": "tooling",
-    "url": "https://virt-manager.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "virt-viewer"
-        }
-      }
-    ]
-  },
-  {
-    "id": "virt-install",
-    "name": "virt-install",
-    "description": "A command-line tool for creating and provisioning new virtual machines using libvirt.",
-    "group": "tooling",
-    "url": "https://virt-manager.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "virt-install"
-        }
-      }
-    ]
-  },
-  {
-    "id": "virtualbox",
-    "name": "VirtualBox",
-    "description": "A powerful cross-platform x86 and AMD64/Intel64 virtualization product for enterprise and home use.",
-    "group": "tooling",
-    "url": "https://www.virtualbox.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "virtualbox"
-        }
-      }
-    ]
-  },
-  {
-    "id": "virtualbox-host-modules-arch",
-    "name": "VirtualBox Host Modules",
-    "description": "Kernel modules required for running VirtualBox on Arch Linux with the default kernel.",
-    "group": "tooling",
-    "url": "https://www.virtualbox.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "virtualbox-host-modules-arch"
-        }
-      }
-    ]
-  },
-  {
-    "id": "virtualbox-guest-utils",
-    "name": "VirtualBox Guest Utilities",
-    "description": "Guest additions and utilities for running Arch Linux inside a VirtualBox virtual machine.",
-    "group": "tooling",
-    "url": "https://www.virtualbox.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "virtualbox-guest-utils"
-        }
-      }
-    ]
-  },
-  {
-    "id": "gnome-boxes",
-    "name": "GNOME Boxes",
-    "description": "A simple GNOME application for creating, configuring, and running virtual machines and remote desktops.",
-    "group": "tooling",
-    "url": "https://apps.gnome.org/Boxes",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "gnome-boxes"
-        }
-      }
-    ]
-  },
-  {
-    "id": "vagrant",
-    "name": "Vagrant",
-    "description": "A tool for building, managing, and distributing portable development environments using virtual machines.",
-    "group": "tooling",
-    "url": "https://www.vagrantup.com",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "vagrant"
-        }
-      }
-    ]
-  },
-  {
-    "id": "edk2-ovmf",
-    "name": "OVMF (UEFI Firmware)",
-    "description": "UEFI firmware for QEMU/KVM virtual machines, enabling UEFI boot support in VMs.",
-    "group": "tooling",
-    "url": "https://github.com/tianocore/edk2",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "edk2-ovmf"
-        }
-      }
-    ]
-  },
-  {
-    "id": "swtpm",
-    "name": "swtpm",
-    "description": "A software TPM emulator providing TPM 1.2 and 2.0 functionality for virtual machines.",
-    "group": "tooling",
-    "url": "https://github.com/stefanberger/swtpm",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "swtpm"
-        }
-      }
-    ]
-  },
-  {
-    "id": "dnsmasq",
-    "name": "dnsmasq",
-    "description": "A lightweight DNS, DHCP, and TFTP server commonly used by libvirt for VM networking.",
-    "group": "tooling",
-    "url": "https://thekelleys.org.uk/dnsmasq/doc.html",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "dnsmasq"
-        }
-      }
-    ]
-  },
-  {
-    "id": "bridge-utils",
-    "name": "bridge-utils",
-    "description": "Utilities for configuring Linux Ethernet bridge devices used in VM networking.",
-    "group": "tooling",
-    "url": "https://wiki.linuxfoundation.org/networking/bridge",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "bridge-utils"
-        }
-      }
-    ]
-  },
-  {
-    "id": "spice-vdagent",
-    "name": "SPICE VD Agent",
-    "description": "An agent for enhancing virtual machine display with copy-paste, resolution, and mouse integration via SPICE protocol.",
-    "group": "tooling",
-    "url": "https://www.spice-space.org",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "spice-vdagent"
-        }
-      }
-    ]
-  },
-  {
-    "id": "looking-glass",
-    "name": "Looking Glass",
-    "description": "A low-latency application for displaying a KVM/QEMU guest screen on the host with near-native performance.",
-    "group": "tooling",
-    "url": "https://looking-glass.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "looking-glass"
-        }
-      }
-    ]
-  },
-  {
-    "id": "virtiofsd",
-    "name": "virtiofsd",
-    "description": "A vhost-user filesystem daemon for sharing host directories with QEMU/KVM virtual machines using virtio-fs.",
-    "group": "tooling",
-    "url": "https://virtio-fs.gitlab.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "virtiofsd"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cloud-init",
-    "name": "cloud-init",
-    "description": "A multi-distribution package for initializing and configuring cloud and virtual machine instances at boot time.",
-    "group": "tooling",
-    "url": "https://cloud-init.io",
-    "install_steps": [
-      {
-        "type": "install_from_pacman",
-        "data": {
-          "id": "cloud-init"
-        }
-      }
-    ]
-  },
-  {
-    "id": "claude-code",
-    "name": "Claude Code",
-    "description": "Anthropic's terminal-native AI coding agent for understanding, editing, and generating code.",
-    "group": "ai_agent",
-    "url": "https://docs.anthropic.com/en/docs/claude-code",
+    "url": "https://maven.apache.org/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "pkexec npm install -g @anthropic-ai/claude-code"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm maven"
         }
       }
     ]
   },
   {
-    "id": "codex-cli",
-    "name": "OpenAI Codex CLI",
-    "description": "OpenAI's official terminal AI coding assistant powered by Codex models.",
-    "group": "ai_agent",
-    "url": "https://github.com/openai/codex",
+    "id": "curl",
+    "name": "cURL",
+    "description": "A command-line tool for transferring data with URLs, supporting numerous protocols including HTTP, HTTPS, FTP, and more.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/curl/curl-original.svg",
+    "group": "tooling",
+    "url": "https://curl.se/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "pkexec npm install -g @openai/codex"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm curl"
         }
       }
     ]
   },
   {
-    "id": "gemini-cli",
-    "name": "Gemini CLI",
-    "description": "Google's official AI coding assistant for the terminal.",
-    "group": "ai_agent",
-    "url": "https://github.com/google-gemini/gemini-cli",
+    "id": "wget",
+    "name": "Wget",
+    "description": "A free network utility for non-interactive download of files from the Web, supporting HTTP, HTTPS, and FTP protocols.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gnu/gnu-original.svg",
+    "group": "tooling",
+    "url": "https://www.gnu.org/software/wget/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "pkexec npm install -g @google/gemini-cli"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm wget"
         }
       }
     ]
   },
   {
-    "id": "aider",
-    "name": "Aider",
-    "description": "A Git-aware AI coding assistant supporting multiple language models.",
-    "group": "ai_agent",
-    "url": "https://aider.chat",
+    "id": "httpie",
+    "name": "HTTPie",
+    "description": "A command-line HTTP client with an intuitive UI, JSON support, and syntax highlighting, serving as a modern alternative to cURL.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/httpie/httpie-original.svg",
+    "group": "tooling",
+    "url": "https://httpie.io/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "pip install aider-chat"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm httpie"
         }
       }
     ]
   },
   {
-    "id": "goose",
-    "name": "Goose",
-    "description": "An open-source AI agent capable of using multiple model providers and local models.",
-    "group": "ai_agent",
-    "url": "https://github.com/block/goose",
+    "id": "postman",
+    "name": "Postman",
+    "description": "An API platform for building and using APIs, streamlining each step of the API lifecycle for testing and documentation.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg",
+    "group": "tooling",
+    "url": "https://www.postman.com/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm postman-bin"
         }
       }
     ]
   },
   {
-    "id": "opencode",
-    "name": "OpenCode",
-    "description": "An open-source terminal coding agent supporting multiple AI providers.",
-    "group": "ai_agent",
-    "url": "https://opencode.ai",
+    "id": "wireshark",
+    "name": "Wireshark",
+    "description": "The world's foremost and widely-used network protocol analyzer, allowing deep inspection of network traffic in real time.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wireshark/wireshark-original.svg",
+    "group": "tooling",
+    "url": "https://www.wireshark.org/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "curl -fsSL https://opencode.ai/install | bash"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm wireshark-qt"
         }
       }
     ]
   },
   {
-    "id": "qwen-code",
-    "name": "Qwen Code",
-    "description": "Alibaba's terminal AI coding assistant for software development.",
-    "group": "ai_agent",
-    "url": "https://github.com/QwenLM/qwen-code",
+    "id": "htop",
+    "name": "Htop",
+    "description": "An interactive process viewer and system monitor for the terminal, designed as an alternative to the traditional top command.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://htop.dev/",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "pkexec npm install -g @qwen-code/qwen-code"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm htop"
         }
       }
     ]
   },
   {
-    "id": "amazon-q",
-    "name": "Amazon Q Developer CLI",
-    "description": "Amazon's AI-powered command-line assistant for software development.",
-    "group": "ai_agent",
-    "url": "https://aws.amazon.com/q/developer",
+    "id": "btop",
+    "name": "Btop",
+    "description": "A resource monitor that shows usage and stats for processor, memory, disks, network, and processes with a gorgeous UI.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/aristocratos/btop",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "pip install amazon-q"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm btop"
         }
       }
     ]
   },
   {
-    "id": "plandex",
-    "name": "Plandex",
-    "description": "An AI coding agent designed for large and long-running development tasks.",
-    "group": "ai_agent",
-    "url": "https://plandex.ai",
+    "id": "tmux",
+    "name": "Tmux",
+    "description": "A terminal multiplexer enabling a number of terminals to be created, accessed, and controlled from a single screen.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tmux/tmux-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/tmux/tmux",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "curl -sL https://plandex.ai/install.sh | bash"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm tmux"
         }
       }
     ]
   },
   {
-    "id": "openclaw",
-    "name": "OpenClaw",
-    "description": "An open-source personal AI assistant that runs on your own devices, integrates with messaging platforms, and automates real-world tasks through a local gateway.",
-    "group": "ai_agent",
-    "url": "https://openclaw.ai/",
+    "id": "fzf",
+    "name": "Fzf",
+    "description": "A general-purpose command-line fuzzy finder used to interactively filter lists like files, command history, and processes.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/junegunn/fzf",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "pkexec npm install -g openclaw@latest"
-        }
-      },
-      {
-        "type": "run_in_terminal",
-        "data": {
-          "script": "openclaw onboard --install-daemon"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm fzf"
         }
       }
     ]
   },
   {
-    "id": "antigravity-cli",
-    "name": "Antigravity CLI",
-    "description": "Work with Antigravity directly in your codebase. Build, debug, and ship from your terminal. Describe what you need, and Antigravity handles the rest.",
-    "group": "ai_agent",
-    "url": "https://antigravity.google",
+    "id": "ripgrep",
+    "name": "Ripgrep",
+    "description": "A line-oriented search tool that recursively searches the current directory for a regex pattern, built for blazing speed.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/BurntSushi/ripgrep",
     "install_steps": [
       {
         "type": "run_custom_script",
         "data": {
-          "script": "curl -fsSL https://antigravity.google/cli/install.sh | bash"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm ripgrep"
+        }
+      }
+    ]
+  },
+  {
+    "id": "jq",
+    "name": "jq",
+    "description": "A lightweight and flexible command-line JSON processor used to slice, filter, map, and transform structured data easily.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://jqlang.github.io/jq/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm jq"
+        }
+      }
+    ]
+  },
+  {
+    "id": "lazygit",
+    "name": "Lazygit",
+    "description": "A simple terminal UI for Git commands, designed to make managing git repositories fast, visual, and frictionless.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/jesseduffield/lazygit",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm lazygit"
+        }
+      }
+    ]
+  },
+  {
+    "id": "bat",
+    "name": "Bat",
+    "description": "A cat clone with wings, featuring syntax highlighting, Git integration, and automatic paging for terminal file viewing.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/sharkdp/bat",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm bat"
+        }
+      }
+    ]
+  },
+  {
+    "id": "eza",
+    "name": "Eza",
+    "description": "A modern, maintained replacement for the traditional ls command with colorful icons, grid views, and Git metadata support.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://eza.rocks/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm eza"
+        }
+      }
+    ]
+  },
+  {
+    "id": "fd",
+    "name": "Fd",
+    "description": "A simple, fast, and user-friendly alternative to the find command, featuring smart defaults and color-coded output.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/sharkdp/fd",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm fd"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direnv",
+    "name": "Direnv",
+    "description": "An environment switcher for the shell that loads and unloads environment variables depending on the current directory.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://direnv.net/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm direnv"
+        }
+      }
+    ]
+  },
+  {
+    "id": "zoxide",
+    "name": "Zoxide",
+    "description": "A fast smart cd command that learns your habits, allowing you to jump to frequent directories with a few keystrokes.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    "group": "tooling",
+    "url": "https://github.com/ajeetdsouza/zoxide",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm zoxide"
+        }
+      }
+    ]
+  },
+  {
+    "id": "stow",
+    "name": "GNU Stow",
+    "description": "A symlink farm manager that takes distinct packages of software and coexists them in a single directory tree neatly.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gnu/gnu-original.svg",
+    "group": "tooling",
+    "url": "https://www.gnu.org/software/stow/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm stow"
         }
       }
     ]
@@ -3708,14 +1101,15 @@
   {
     "id": "firefox",
     "name": "Firefox",
-    "description": "Fast, Private & Safe Web Browser.",
+    "description": "A free and open-source web browser developed by Mozilla, focused on privacy, security, and web standards compliance.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firefox/firefox-original.svg",
     "group": "browser",
-    "url": "https://www.mozilla.org/firefox",
+    "url": "https://www.mozilla.org/firefox/",
     "install_steps": [
       {
-        "type": "install_from_pacman",
+        "type": "run_custom_script",
         "data": {
-          "id": "firefox"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm firefox"
         }
       }
     ]
@@ -3723,59 +1117,63 @@
   {
     "id": "chromium",
     "name": "Chromium",
-    "description": "A web browser built for speed, simplicity, and security.",
+    "description": "An open-source browser project that aims to build a safer, faster, and more stable way for all users to experience the web.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chromium/chromium-original.svg",
     "group": "browser",
-    "url": "https://www.chromium.org",
+    "url": "https://www.chromium.org/",
     "install_steps": [
       {
-        "type": "install_from_pacman",
+        "type": "run_custom_script",
         "data": {
-          "id": "chromium"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm chromium"
         }
       }
     ]
   },
   {
-    "id": "epiphany",
-    "name": "GNOME Web",
-    "description": "A GNOME web browser based on the WebKit rendering engine.",
+    "id": "google-chrome",
+    "name": "Google Chrome",
+    "description": "A fast, secure, and widely used cross-platform web browser developed by Google.",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg",
     "group": "browser",
-    "url": "https://apps.gnome.org/Epiphany",
+    "url": "https://www.google.com/chrome/",
     "install_steps": [
       {
-        "type": "install_from_pacman",
+        "type": "run_custom_script",
         "data": {
-          "id": "epiphany"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm google-chrome"
         }
       }
     ]
   },
   {
-    "id": "falkon",
-    "name": "Falkon",
-    "description": "Cross-platform QtWebEngine browser.",
+    "id": "brave",
+    "name": "Brave",
+    "description": "A privacy-focused web browser that automatically blocks ads and trackers, built on the Chromium engine.",
+    "icon": "",
     "group": "browser",
-    "url": "https://www.falkon.org",
+    "url": "https://brave.com/",
     "install_steps": [
       {
-        "type": "install_from_pacman",
+        "type": "run_custom_script",
         "data": {
-          "id": "falkon"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm brave-bin"
         }
       }
     ]
   },
   {
-    "id": "qutebrowser",
-    "name": "qutebrowser",
-    "description": "A keyboard-driven, vim-like browser based on Python and Qt.",
+    "id": "vivaldi",
+    "name": "Vivaldi",
+    "description": "A highly customizable and feature-rich web browser built for power users and heavy web multitaskers.",
+    "icon": "",
     "group": "browser",
-    "url": "https://qutebrowser.org",
+    "url": "https://vivaldi.com/",
     "install_steps": [
       {
-        "type": "install_from_pacman",
+        "type": "run_custom_script",
         "data": {
-          "id": "qutebrowser"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm vivaldi"
         }
       }
     ]
@@ -3783,14 +1181,189 @@
   {
     "id": "tor-browser",
     "name": "Tor Browser",
-    "description": "A privacy-focused web browser based on Firefox and the Tor network.",
+    "description": "A secure web browser that protects your privacy by routing your traffic through the decentralized Tor network.",
+    "icon": "",
     "group": "browser",
-    "url": "https://www.torproject.org",
+    "url": "https://www.torproject.org/",
     "install_steps": [
       {
-        "type": "install_from_pacman",
+        "type": "run_custom_script",
         "data": {
-          "id": "torbrowser-launcher"
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && sudo -A pacman -S --noconfirm torbrowser-launcher"
+        }
+      }
+    ]
+  },
+
+  {
+    "id": "claude-code",
+    "name": "Claude Code CLI",
+    "description": "Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://code.claude.com",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://claude.ai/install.sh | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "codex",
+    "name": "Codex CLI",
+    "description": "Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://openai.com/index/introducing-codex/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://chatgpt.com/codex/install.sh | sh"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cursor",
+    "name": "Cursor CLI",
+    "description": "Ship code with agents\nRight from your terminal.",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://cursor.com/cli",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl https://cursor.com/install -fsS | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gemini",
+    "name": "Gemini CLI",
+    "description": "Query and edit large codebases, generate apps from images or PDFs, and automate complex workflows—all from your terminal with Gemini 3.",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://geminicli.com/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && npm install -g @google/gemini-cli"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gh-copilot",
+    "name": "Github Copilot CLI",
+    "description": "Run a GitHub-native agent in your terminal that works directly with your issues and pull requests, executes across a /fleet of parallelized subagents, and carries you from /plan to merged code.\n\n",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://github.com/features/copilot/cli",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://gh.io/copilot-install | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "kimi-code",
+    "name": "Kimi Code CLI",
+    "description": "Kimi Code CLI is an AI coding agent that runs in your terminal — it can read and edit code, run shell commands, search files, fetch web pages, and choose the next step based on the feedback it receives. It works out of the box with Moonshot AI’s Kimi models and can also be configured to use other compatible providers.",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://github.com/MoonshotAI/kimi-code",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "kimi-code",
+    "name": "Kimi Code CLI",
+    "description": "Kimi Code CLI is an AI coding agent that runs in your terminal — it can read and edit code, run shell commands, search files, fetch web pages, and choose the next step based on the feedback it receives. It works out of the box with Moonshot AI’s Kimi models and can also be configured to use other compatible providers.",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://github.com/MoonshotAI/kimi-code",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "kiro",
+    "name": "Kiro",
+    "description": "Kiro helps developers and teams do their best work: turn prompts into executable specs, validate code correctness to find bugs unit tests miss, and build across large codebases with parallel agents that learn from every session.",
+    "icon": "",
+    "group": "ai_agent",
+    "url": "https://kiro.dev/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://cli.kiro.dev/install | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "agy",
+    "name": "Antigravity CLI\n",
+    "description": "Work with Antigravity directly in your codebase. Build, debug, and ship from your terminal. Describe what you need, and Antigravity handles the rest.",  "icon": "",
+    "group": "ai_agent",
+    "url": "https://antigravity.google/",
+    "install_steps": [
+      {
+        "type": "run_custom_script",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://antigravity.google/cli/install.sh | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hermes",
+    "name": "Hermes Agent",
+    "description": "The self-improving AI agent built by Nous Research. It's the only agent with a built-in learning loop — it creates skills from experience, improves them during use, nudges itself to persist knowledge, searches its own past conversations, and builds a deepening model of who you are across sessions. Run it on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle. It's not tied to your laptop — talk to it from Telegram while it works on a cloud VM.",    "icon": "",
+    "group": "ai_agent",
+    "url": "https://github.com/NousResearch/hermes-agent",
+    "install_steps": [
+      {
+        "type": "run_in_terminal",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash"
+        }
+      }
+    ]
+  },
+  {
+    "id": "openclaw",
+    "name": "OpenClaw",
+    "description": "OpenClaw is an open-source AI assistant that runs on your own computer and meets you in the channels you already use: Discord, iMessage, Slack, Teams, Telegram, WhatsApp, and 20+ more, plus native apps for macOS, iOS, Android, Windows, and Linux. One Gateway runs it as a personal assistant on a laptop or as a shared team deployment; configuration is the only difference.",    "icon": "",
+    "group": "ai_agent",
+    "url": "https://github.com/openclaw/openclaw",
+    "install_steps": [
+      {
+        "type": "run_in_terminal",
+        "data": {
+          "script": "export SUDO_ASKPASS=\"/usr/local/bin/bakeryos-dev-wizard-askpass.sh\" && curl -fsSL https://openclaw.ai/install.sh | bash"
         }
       }
     ]

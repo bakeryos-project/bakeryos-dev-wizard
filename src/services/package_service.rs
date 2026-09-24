@@ -116,8 +116,8 @@ impl PackageService {
             PackageInstallStep::RunCustomScript(run_custom_script_config) => {
                 PackageService::run_custom_script(run_custom_script_config)
             }
-            PackageInstallStep::RunInTerminal(run_in_termial_config) => {
-                PackageService::run_in_terminal(run_in_termial_config)
+            PackageInstallStep::RunInTerminal(run_in_terminal_config) => {
+                PackageService::run_in_terminal(run_in_terminal_config)
             }
         }
     }

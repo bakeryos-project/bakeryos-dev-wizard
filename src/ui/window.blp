@@ -60,180 +60,155 @@ template $MainWindow: Adw.ApplicationWindow {
                             vexpand: true;
                             hexpand: true;
 
-                Adw.ViewStackPage {
-                    name: "code_editor";
-                    title: _("Code Editors");
-                    icon-name: "applications-development-symbolic";
+                            Adw.ViewStackPage {
+                                name: "code_editor";
+                                title: _("Code Editors");
+                                icon-name: "applications-development-symbolic";
 
-                    child: Gtk.ScrolledWindow {
-                        vexpand: true;
-                        hexpand: true;
+                                child: Gtk.ScrolledWindow {
+                                    vexpand: true;
+                                    hexpand: true;
 
-                        child: Gtk.FlowBox code_editor_packages {
-                            valign: start;
-                            hexpand: true;
-                            homogeneous: true;
+                                    child: Gtk.FlowBox code_editor_packages {
+                                        valign: start;
+                                        hexpand: true;
+                                        homogeneous: true;
 
-                            row-spacing: 12;
-                            column-spacing: 12;
+                                        row-spacing: 12;
+                                        column-spacing: 12;
 
-                            min-children-per-line: 3;
-                            max-children-per-line: 3;
+                                        min-children-per-line: 3;
+                                        max-children-per-line: 3;
 
-                            selection-mode: none;
-                        };
-                    };
-                }
+                                        selection-mode: none;
+                                    };
+                                };
+                            }
 
-                Adw.ViewStackPage {
-                    name: "programming_language";
-                    title: _("Languages");
-                    icon-name: "utilities-terminal-symbolic";
+                            Adw.ViewStackPage {
+                                name: "programming_language";
+                                title: _("Languages");
+                                icon-name: "utilities-terminal-symbolic";
 
-                    child: Gtk.ScrolledWindow {
-                        vexpand: true;
-                        hexpand: true;
+                                child: Gtk.ScrolledWindow {
+                                    vexpand: true;
+                                    hexpand: true;
 
-                        child: Gtk.FlowBox programming_language_packages {
-                            valign: start;
-                            hexpand: true;
-                            homogeneous: true;
+                                    child: Gtk.FlowBox programming_language_packages {
+                                        valign: start;
+                                        hexpand: true;
+                                        homogeneous: true;
 
-                            row-spacing: 12;
-                            column-spacing: 12;
+                                        row-spacing: 12;
+                                        column-spacing: 12;
 
-                            min-children-per-line: 3;
-                            max-children-per-line: 3;
+                                        min-children-per-line: 3;
+                                        max-children-per-line: 3;
 
-                            selection-mode: none;
-                        };
-                    };
-                }
+                                        selection-mode: none;
+                                    };
+                                };
+                            }
 
-                Adw.ViewStackPage {
-                    name: "framework";
-                    title: _("Frameworks");
-                    icon-name: "package-x-generic-symbolic";
+                            Adw.ViewStackPage {
+                                name: "tooling";
+                                title: _("Toolings");
+                                icon-name: "applications-system-symbolic";
 
-                    child: Gtk.ScrolledWindow {
-                        vexpand: true;
-                        hexpand: true;
+                                child: Gtk.ScrolledWindow {
+                                    vexpand: true;
+                                    hexpand: true;
 
-                        child: Gtk.FlowBox framework_packages {
-                            valign: start;
-                            hexpand: true;
-                            homogeneous: true;
+                                    child: Gtk.FlowBox tooling_packages {
+                                        valign: start;
+                                        hexpand: true;
+                                        homogeneous: true;
 
-                            row-spacing: 12;
-                            column-spacing: 12;
+                                        row-spacing: 12;
+                                        column-spacing: 12;
 
-                            min-children-per-line: 3;
-                            max-children-per-line: 3;
+                                        min-children-per-line: 3;
+                                        max-children-per-line: 3;
 
-                            selection-mode: none;
-                        };
-                    };
-                }
+                                        selection-mode: none;
+                                    };
+                                };
+                            }
 
-                Adw.ViewStackPage {
-                    name: "tooling";
-                    title: _("Toolings");
-                    icon-name: "applications-system-symbolic";
+                            Adw.ViewStackPage {
+                                name: "ai_agent";
+                                title: _("AI Agents");
+                                icon-name: "cpu-symbolic";
 
-                    child: Gtk.ScrolledWindow {
-                        vexpand: true;
-                        hexpand: true;
+                                child: Gtk.ScrolledWindow {
+                                    vexpand: true;
+                                    hexpand: true;
 
-                        child: Gtk.FlowBox tooling_packages {
-                            valign: start;
-                            hexpand: true;
-                            homogeneous: true;
+                                    child: Gtk.FlowBox ai_agent_packages {
+                                        valign: start;
+                                        hexpand: true;
+                                        homogeneous: true;
 
-                            row-spacing: 12;
-                            column-spacing: 12;
+                                        row-spacing: 12;
+                                        column-spacing: 12;
 
-                            min-children-per-line: 3;
-                            max-children-per-line: 3;
+                                        min-children-per-line: 3;
+                                        max-children-per-line: 3;
 
-                            selection-mode: none;
-                        };
-                    };
-                }
+                                        selection-mode: none;
+                                    };
+                                };
+                            }
 
-                Adw.ViewStackPage {
-                    name: "ai_agent";
-                    title: _("AI Agents");
-                    icon-name: "cpu-symbolic";
+                            Adw.ViewStackPage {
+                                name: "browser";
+                                title: _("Browsers");
+                                icon-name: "web-browser-symbolic";
 
-                    child: Gtk.ScrolledWindow {
-                        vexpand: true;
-                        hexpand: true;
+                                child: Gtk.ScrolledWindow {
+                                    vexpand: true;
+                                    hexpand: true;
 
-                        child: Gtk.FlowBox ai_agent_packages {
-                            valign: start;
-                            hexpand: true;
-                            homogeneous: true;
+                                    child: Gtk.FlowBox browser_packages {
+                                        valign: start;
+                                        hexpand: true;
+                                        homogeneous: true;
 
-                            row-spacing: 12;
-                            column-spacing: 12;
+                                        row-spacing: 12;
+                                        column-spacing: 12;
 
-                            min-children-per-line: 3;
-                            max-children-per-line: 3;
+                                        min-children-per-line: 3;
+                                        max-children-per-line: 3;
 
-                            selection-mode: none;
-                        };
-                    };
-                }
+                                        selection-mode: none;
+                                    };
+                                };
+                            }
 
-                Adw.ViewStackPage {
-                    name: "browser";
-                    title: _("Browsers");
-                    icon-name: "web-browser-symbolic";
+                            Adw.ViewStackPage {
+                                name: "other";
+                                title: _("Other");
+                                icon-name: "view-app-grid-symbolic";
 
-                    child: Gtk.ScrolledWindow {
-                        vexpand: true;
-                        hexpand: true;
+                                child: Gtk.ScrolledWindow {
+                                    vexpand: true;
+                                    hexpand: true;
 
-                        child: Gtk.FlowBox browser_packages {
-                            valign: start;
-                            hexpand: true;
-                            homogeneous: true;
+                                    child: Gtk.FlowBox other_packages {
+                                        valign: start;
+                                        hexpand: true;
+                                        homogeneous: true;
 
-                            row-spacing: 12;
-                            column-spacing: 12;
+                                        row-spacing: 12;
+                                        column-spacing: 12;
 
-                            min-children-per-line: 3;
-                            max-children-per-line: 3;
+                                        min-children-per-line: 3;
+                                        max-children-per-line: 3;
 
-                            selection-mode: none;
-                        };
-                    };
-                }
-
-                Adw.ViewStackPage {
-                    name: "other";
-                    title: _("Other");
-                    icon-name: "view-app-grid-symbolic";
-
-                    child: Gtk.ScrolledWindow {
-                        vexpand: true;
-                        hexpand: true;
-
-                        child: Gtk.FlowBox other_packages {
-                            valign: start;
-                            hexpand: true;
-                            homogeneous: true;
-
-                            row-spacing: 12;
-                            column-spacing: 12;
-
-                            min-children-per-line: 3;
-                            max-children-per-line: 3;
-
-                            selection-mode: none;
-                        };
-                    };
-                }
+                                        selection-mode: none;
+                                    };
+                                };
+                            }
                         }
                     };
                 }
