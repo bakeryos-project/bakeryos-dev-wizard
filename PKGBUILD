@@ -1,7 +1,7 @@
 # Maintainer: smtdfc <me.smtdfc@gmail.com>
 
 pkgname=bakeryos-dev-wizard
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="A post-installation setup wizard and developer environment installer for BakeryOS."
 arch=('x86_64')
@@ -29,5 +29,6 @@ package() {
     install -d "${pkgdir}/usr/local/bin"
     cp -a ${srcdir}/scripts/* ${pkgdir}/usr/local/bin
     cd $startdir
-    meson install -C build --no-rebuild --destdir "$pkgdir"
+    
+    install -Dm644 "${startdir}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
